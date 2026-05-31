@@ -11,11 +11,13 @@ Generate complex test objects automatically. Use when entities/DTOs have 3+ prop
 
 ## Dependency
 
+Use the version already defined in the project, or check the latest release on Maven Central:
+
 ```xml
 <dependency>
   <groupId>org.instancio</groupId>
   <artifactId>instancio-junit</artifactId>
-  <version>5.5.1</version>
+  <version>{detected-version}</version>
   <scope>test</scope>
 </dependency>
 ```

@@ -4,20 +4,22 @@
 
 Use Maven or Gradle for dependency management.
 
+**Detect the project's Spring Boot version** by reading `pom.xml` or `build.gradle`. Use the version already defined there — never hardcode a version in generated code.
+
 ```xml
-<!-- Maven: pom.xml -->
+<!-- Maven: pom.xml — use the version detected from the project -->
 <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.0</version>
+    <version>{detected-version}</version>
 </parent>
 ```
 
 ```groovy
-// Gradle: build.gradle
+// Gradle: build.gradle — use the version detected from the project
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.0'
+    id 'org.springframework.boot' version '{detected-version}'
 }
 ```
 
