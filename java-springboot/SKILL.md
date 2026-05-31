@@ -66,7 +66,7 @@ mvn test -Dtest=OrderServiceTest
 
 ## Testing
 
-For comprehensive testing guidance (test slices, MockMvcTester, Testcontainers, AssertJ), see the [spring-boot-testing](../spring-boot-testing/SKILL.md) skill.
+For comprehensive testing guidance (test slices, MockMvcTester, Testcontainers, AssertJ), see the [java-springboot-testing](../java-springboot-testing/SKILL.md) skill.
 
 ### Quick Reference
 

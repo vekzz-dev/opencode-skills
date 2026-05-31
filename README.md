@@ -11,7 +11,7 @@ A collection of AI agent skills for [OpenCode](https://github.com/opencode-ai/op
 | [git-commit](git-commit/) | Conventional commits with intelligent staging and message generation |
 | [java-junit](java-junit/) | JUnit 5 best practices: parameterized tests, assertions, mocking |
 | [java-springboot](java-springboot/) | Spring Boot production patterns: DI, REST, security, caching |
-| [spring-boot-testing](spring-boot-testing/) | Test slices, MockMvcTester, Testcontainers, AssertJ |
+| [java-springboot-testing](java-springboot-testing/) | Test slices, MockMvcTester, Testcontainers, AssertJ |
 | [update-readme](update-readme/) | Detect and update outdated README content |
 
 ## Structure
@@ -31,7 +31,7 @@ Copy the skill folders to your OpenCode skills directory:
 
 ```bash
 # User-level skills
-cp -r changelog-maintenance create-readme git-commit java-junit java-springboot spring-boot-testing update-readme \
+cp -r changelog-maintenance create-readme git-commit java-junit java-springboot java-springboot-testing update-readme \
   ~/.config/opencode/skills/
 ```
 

@@ -1,5 +1,5 @@
 ---
-name: spring-boot-testing
+name: java-springboot-testing
 description: >
   Expert Spring Boot testing specialist that selects the best testing techniques for your situation with JUnit and AssertJ.
   Trigger: When writing Spring Boot tests, need testing patterns, or working with test slices.

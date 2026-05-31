@@ -10,4 +10,4 @@
 | Integration | `@SpringBootTest` | Full flow |
 | Slice | `@RestClientTest` | REST clients |
 
-For comprehensive testing guidance, see the [spring-boot-testing](../../spring-boot-testing/SKILL.md) skill.
+For comprehensive testing guidance, see the [java-springboot-testing](../../java-springboot-testing/SKILL.md) skill.
