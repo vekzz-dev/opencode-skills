@@ -6,13 +6,18 @@ A collection of AI agent skills for [OpenCode](https://github.com/opencode-ai/op
 
 | Skill | Description |
 |-------|-------------|
+| [api-design](api-design/) | REST API design: resource naming, versioning, error handling, pagination, HATEOAS, OpenAPI |
 | [changelog-maintenance](changelog-maintenance/) | Semantic versioning, changelogs, and release notes |
 | [create-readme](create-readme/) | Generate comprehensive README files for any project type |
+| [database-design](database-design/) | Database modeling, normalization, indexing, migrations, query optimization |
+| [docker](docker/) | Multi-stage builds, docker-compose, security, image optimization |
 | [git-commit](git-commit/) | Conventional commits with intelligent staging and message generation |
 | [java-junit](java-junit/) | JUnit 5 best practices: parameterized tests, assertions, mocking |
 | [java-springboot](java-springboot/) | Spring Boot production patterns: DI, REST, security, caching |
 | [java-springboot-testing](java-springboot-testing/) | Test slices, MockMvcTester, Testcontainers, AssertJ |
+| [ui-components](ui-components/) | Preline UI, HyperUI, Flowbite — component libraries for Thymeleaf + HTMX |
 | [update-readme](update-readme/) | Detect and update outdated README content |
+| [web-mvc](web-mvc/) | Thymeleaf + HTMX + Alpine.js — server-side web UIs without React |
 
 ## Structure
 
@@ -31,7 +36,8 @@ Copy the skill folders to your OpenCode skills directory:
 
 ```bash
 # User-level skills
-cp -r changelog-maintenance create-readme git-commit java-junit java-springboot java-springboot-testing update-readme \
+cp -r api-design changelog-maintenance create-readme database-design docker git-commit java-junit \
+  java-springboot java-springboot-testing ui-components update-readme web-mvc \
   ~/.config/opencode/skills/
 ```
 
