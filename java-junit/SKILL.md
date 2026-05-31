@@ -6,7 +6,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: vekzz-dev
-  version: "1.0"
+  version: "1.1"
 ---
 
 ## When to Use
@@ -35,6 +35,39 @@ metadata:
 - Use `@BeforeAll` and `@AfterAll` for per-class setup and teardown (must be static methods)
 - Use `@DisplayName` to provide a human-readable name for test classes and methods
 
+```java
+class CalculatorTest {
+
+    private Calculator calculator;
+
+    @BeforeEach
+    void setUp() {
+        calculator = new Calculator();
+    }
+
+    @Test
+    @DisplayName("Should add two positive numbers")
+    void add_shouldReturnSum_whenBothPositive() {
+        // Arrange
+        int a = 3, b = 5;
+
+        // Act
+        int result = calculator.add(a, b);
+
+        // Assert
+        assertEquals(8, result);
+    }
+
+    @Test
+    @DisplayName("Should throw exception when dividing by zero")
+    void divide_shouldThrowException_whenDenominatorIsZero() {
+        assertThrows(ArithmeticException.class,
+            () -> calculator.divide(10, 0),
+            "Division by zero should throw");
+    }
+}
+```
+
 ### Standard Tests
 
 - Keep tests focused on a single behavior
@@ -51,6 +84,41 @@ metadata:
 - Use `@CsvFileSource` to use a CSV file from the classpath
 - Use `@EnumSource` to use enum constants
 
+```java
+@ParameterizedTest
+@ValueSource(ints = {1, 2, 3, 5, 8, 13})
+@DisplayName("Should identify Fibonacci numbers")
+void isFibonacci_shouldReturnTrue_forFibonacciNumbers(int number) {
+    assertTrue(calculator.isFibonacci(number));
+}
+
+@ParameterizedTest
+@CsvSource({
+    "4, 2, 2",
+    "10, 3, 1",
+    "7, 5, 2"
+})
+@DisplayName("Should compute modulo for various inputs")
+void modulo_shouldReturnRemainder(int dividend, int divisor, int expected) {
+    assertEquals(expected, calculator.modulo(dividend, divisor));
+}
+
+@ParameterizedTest
+@MethodSource("provideOrderStatuses")
+@DisplayName("Should return correct display name for each status")
+void getDisplayName_shouldReturnCorrectLabel(OrderStatus status, String expected) {
+    assertEquals(expected, status.getDisplayName());
+}
+
+static Stream<Arguments> provideOrderStatuses() {
+    return Stream.of(
+        Arguments.of(OrderStatus.PENDING, "Pending"),
+        Arguments.of(OrderStatus.SHIPPED, "Shipped"),
+        Arguments.of(OrderStatus.DELIVERED, "Delivered")
+    );
+}
+```
+
 ### Assertions
 
 - Use the static methods from `org.junit.jupiter.api.Assertions` (e.g., `assertEquals`, `assertTrue`, `assertNotNull`)
@@ -59,11 +127,81 @@ metadata:
 - Group related assertions with `assertAll` to ensure all assertions are checked before the test fails
 - Use descriptive messages in assertions to provide clarity on failure
 
+```java
+@Test
+@DisplayName("Should create order with all required fields")
+void createOrder_shouldSetAllFields() {
+    Order order = orderService.create("customer-1", List.of("item-a"), 2990);
+
+    assertAll("order fields",
+        () -> assertEquals("customer-1", order.getCustomerId(), "customer id"),
+        () -> assertEquals(2, order.getItemCount(), "item count"),
+        () -> assertNotNull(order.getCreatedAt(), "creation timestamp"),
+        () -> assertEquals(OrderStatus.PENDING, order.getStatus(), "initial status")
+    );
+}
+
+// AssertJ example
+@Test
+@DisplayName("Should return orders sorted by date")
+void findRecentOrders_shouldReturnSortedResults() {
+    List<Order> orders = orderService.findRecent(7);
+
+    assertThat(orders)
+        .isNotEmpty()
+        .hasSizeLessThanOrEqualTo(50)
+        .extracting(Order::getStatus)
+        .contains(OrderStatus.SHIPPED);
+}
+```
+
 ### Mocking and Isolation
 
 - Use a mocking framework like Mockito to create mock objects for dependencies
 - Use `@Mock` and `@InjectMocks` annotations from Mockito to simplify mock creation and injection
 - Use interfaces to facilitate mocking
+
+```java
+@ExtendWith(MockitoExtension.class)
+class OrderServiceTest {
+
+    @Mock
+    private PaymentGateway paymentGateway;
+
+    @Mock
+    private InventoryClient inventoryClient;
+
+    @InjectMocks
+    private OrderService orderService;
+
+    @Test
+    @DisplayName("Should process payment when placing order")
+    void placeOrder_shouldProcessPayment() {
+        // Arrange
+        when(inventoryClient.isAvailable("item-1")).thenReturn(true);
+        when(paymentGateway.charge(any(Payment.class)))
+            .thenReturn(new PaymentResult("tx-123", PaymentStatus.SUCCESS));
+
+        // Act
+        Order order = orderService.placeOrder("customer-1", "item-1");
+
+        // Assert
+        assertThat(order.getTransactionId()).isEqualTo("tx-123");
+        verify(paymentGateway).charge(any(Payment.class));
+    }
+
+    @Test
+    @DisplayName("Should throw when inventory is insufficient")
+    void placeOrder_shouldThrow_whenItemUnavailable() {
+        when(inventoryClient.isAvailable("item-1")).thenReturn(false);
+
+        assertThrows(InsufficientInventoryException.class,
+            () -> orderService.placeOrder("customer-1", "item-1"));
+
+        verify(paymentGateway, never()).charge(any());
+    }
+}
+```
 
 ### Test Organization
 
@@ -72,6 +210,38 @@ metadata:
 - Use `@TestMethodOrder(MethodOrderer.OrderAnnotation.class)` and `@Order` to control test execution order when strictly necessary
 - Use `@Disabled` to temporarily skip a test method or class, providing a reason
 - Use `@Nested` to group tests in a nested inner class for better organization and structure
+
+```java
+@DisplayName("OrderService")
+class OrderServiceTest {
+
+    @Nested
+    @DisplayName("placeOrder")
+    class PlaceOrder {
+
+        @Test
+        @DisplayName("Should create order successfully")
+        void shouldCreateOrder() { }
+
+        @Test
+        @DisplayName("Should reject duplicate orders")
+        void shouldRejectDuplicate() { }
+    }
+
+    @Nested
+    @DisplayName("cancelOrder")
+    class CancelOrder {
+
+        @Test
+        @DisplayName("Should cancel pending order")
+        void shouldCancelPending() { }
+
+        @Test
+        @DisplayName("Should throw when order is already shipped")
+        void shouldThrowWhenShipped() { }
+    }
+}
+```
 
 ## Commands
 
