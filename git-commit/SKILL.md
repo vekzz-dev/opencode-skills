@@ -6,7 +6,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: vekzz-dev
-  version: "1.0"
+  version: "1.1"
 ---
 
 ## When to Use
@@ -147,6 +147,65 @@ BREAKING CHANGE: `extends` key behavior changed
 - Imperative mood: "fix bug" not "fixes bug"
 - Reference issues: `Closes #123`, `Refs #456`
 - Keep description under 72 characters
+
+## Atomic Commits & Logical Order
+
+### Definition
+
+A commit represents a **deliverable behavior, fix, migration, or documentation unit** — not a file type or architectural layer.
+
+### Logical Order
+
+Commits must follow dependency order so each step is independently verifiable:
+
+1. **Dependencies first** — models, types, schemas, migrations
+2. **Behavior after** — services, use cases, business logic
+3. **Integration at the end** — wiring, endpoints, UI, configuration
+
+**Tests** belong in the same commit as the behavior they verify.
+**Docs** belong in the same commit as the user-visible change they explain.
+
+### The Review Test
+
+Before committing, confirm:
+
+- [ ] Can this commit be understood **on its own**?
+- [ ] Does the repo **compile / build** with ONLY this commit applied?
+- [ ] Can I **revert** this commit without breaking unrelated work?
+- [ ] Are **tests included** if this commit adds or changes behavior?
+
+### Good vs Weak Splits
+
+**Weak — split by file type (avoid):**
+
+```
+feat: add User model
+feat: add User service
+feat: add User controller
+feat: add User tests
+```
+
+Why: each commit leaves the repo in a broken or incomplete state. Tests arrive after the fact, so nothing is verifiable mid-series.
+
+**Strong — split by behavior, logical order:**
+
+```
+feat(auth): add User model with validation rules
+feat(auth): implement user registration with tests
+feat(auth): wire registration endpoint
+```
+
+Why: each commit is self-contained. The repo compiles after every step. `git bisect` works reliably.
+
+### Anti-Patterns
+
+| Anti-Pattern | Why It Fails |
+|---|---|
+| Tests in a separate commit | Behavior can't be verified until tests arrive — breaks `git bisect` |
+| Docs as a follow-up commit | Docs arrive after the feature shipped, confusing users |
+| Refactor + feature in one commit | Two concerns: impossible to review or revert cleanly |
+| Mid-series compilation broken | Every commit must compile — otherwise the series is not atomic |
+| `git add .` without reviewing staging | Groups unrelated changes into one commit, losing atomicity |
 
 ## Commit Body
 
