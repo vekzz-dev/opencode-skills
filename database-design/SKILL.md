@@ -86,6 +86,7 @@ FOREIGN KEY ... ON DELETE   -- referential integrity
 - Use **EXPLAIN ANALYZE** before optimizing
 - Prefer **set-based** operations over row-by-row (cursors)
 - Use `LIMIT` / `OFFSET` for pagination, but prefer keyset pagination for large datasets
+- See [references/query-optimization.md](references/query-optimization.md) for execution plans, join strategies, CTEs vs subqueries, N+1, and dialect-specific tips
 
 ### 9. Decision Table
 
