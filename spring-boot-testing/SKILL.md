@@ -6,7 +6,7 @@ description: >
 license: Apache-2.0
 metadata:
   author: vekzz-dev
-  version: "1.0"
+  version: "1.1"
 ---
 
 ## When to Use
@@ -18,6 +18,28 @@ metadata:
 - Writing integration tests with Testcontainers
 
 ## Instructions
+
+### Quick Decision Tree
+
+```
+Testing a controller endpoint?
+  Yes → @WebMvcTest with MockMvcTester
+
+Testing repository queries?
+  Yes → @DataJpaTest with Testcontainers (real DB)
+
+Testing business logic in service?
+  Yes → Plain JUnit + Mockito (no Spring context)
+
+Testing external API client?
+  Yes → @RestClientTest with MockRestServiceServer
+
+Testing JSON mapping?
+  Yes → @JsonTest
+
+Need full integration test?
+  Yes → @SpringBootTest with minimal context config
+```
 
 ### Core Principles
 
@@ -88,28 +110,6 @@ gradle test --tests OrderControllerTest
 
 # Run integration tests
 mvn verify -P integration-test
-```
-
-## Quick Decision Tree
-
-```
-Testing a controller endpoint?
-  Yes → @WebMvcTest with MockMvcTester
-
-Testing repository queries?
-  Yes → @DataJpaTest with Testcontainers (real DB)
-
-Testing business logic in service?
-  Yes → Plain JUnit + Mockito (no Spring context)
-
-Testing external API client?
-  Yes → @RestClientTest with MockRestServiceServer
-
-Testing JSON mapping?
-  Yes → @JsonTest
-
-Need full integration test?
-  Yes → @SpringBootTest with minimal context config
 ```
 
 ## Spring Boot 4 Highlights
