@@ -1,12 +1,12 @@
 ---
 name: git-commit
 description: >
-  Execute git commit with conventional commit message analysis, intelligent staging, and message generation.
+  Execute atomic git commits with conventional commit message analysis, intelligent staging, and message generation.
   Trigger: When user asks to commit changes, create a git commit, or mentions "/commit".
 license: Apache-2.0
 metadata:
   author: vekzz-dev
-  version: "1.1"
+  version: "1.2"
 ---
 
 ## When to Use
@@ -18,40 +18,69 @@ metadata:
 
 ## Instructions
 
-### 1. Analyze Diff
+**Core principle: one commit = one deliverable behavior.** If the working tree has multiple unrelated changes, do NOT commit them together. Commit one, then the next.
+
+### 0. Classify the Changes (MANDATORY)
 
 ```bash
-# If files are staged, use staged diff
-git diff --staged
+# See everything that changed (tracked + untracked)
+git status --porcelain
 
-# If nothing staged, use working tree diff
+# See full diff
 git diff
 
-# Also check status
-git status --porcelain
+# Also see staged if resuming a partial commit
+git diff --staged
 ```
 
-### 2. Stage Files (if needed)
+Group every change by **which deliverable behavior** it belongs to:
 
-If nothing is staged or you want to group changes differently:
+- Bug fix A (e.g., null pointer in login)
+- Feature B (e.g., dark mode toggle)
+- Refactor C (e.g., extract auth helper)
+- Config D (e.g., CI workflow change)
+
+**If 2+ unrelated concerns exist:** stop. Do NOT stage everything. Show the user the groups and ask: *"Which one do you want to commit now?"*
+
+**If only one concern:** proceed directly to step 1.
+
+### 1. Stage This Atomic Change ONLY
+
+Stage **only** the files or hunks that belong to the selected logical change:
 
 ```bash
 # Stage specific files
 git add path/to/file1 path/to/file2
 
-# Stage by pattern
-git add *.test.*
-git add src/components/*
+# Stage individual hunks when a file has mixed concerns
+git add -p path/to/file-with-mixed-changes
 
-# Interactive staging
-git add -p
+# Stage by pattern
+git add src/feature-b/*
 ```
 
-**Never commit secrets** (.env, credentials.json, private keys).
+**Never commit secrets** (.env, credentials.json, private keys). Add these to `.gitignore` preventively.
+
+**Never use bare `git add .`** without first verifying it only captures one concern.
+
+### 2. Verify Atomic Staging (MANDATORY GATE)
+
+```bash
+git diff --staged
+```
+
+Confirm the staged diff passes **The Review Test**:
+
+- [ ] Is this ONE deliverable behavior?
+- [ ] Does the repo compile/build with ONLY this change?
+- [ ] Can someone understand what it does from the diff?
+- [ ] Are tests included if this adds or changes behavior?
+
+If the staged changes fail any check — stop, unstage (`git restore --staged .`), and re-split.
 
 ### 3. Generate Commit Message
 
-Analyze the diff to determine:
+Analyze the staged diff to determine:
 
 - **Type**: What kind of change is this?
 - **Scope**: What area/module is affected?
@@ -62,7 +91,7 @@ Analyze the diff to determine:
 ```bash
 # Multi-line (body is mandatory)
 git commit -m "$(cat <<'EOF'
-<type>[scope]: <description>
+<type>(<scope>): <description>
 
 <body>
 
@@ -70,6 +99,20 @@ git commit -m "$(cat <<'EOF'
 EOF
 )"
 ```
+
+### 5. Signed Commits (GPG/SSH)
+
+If you have a GPG or SSH signing key configured:
+
+```bash
+# Sign a single commit
+git commit -S -m "type(scope): description"
+
+# Or configure Git to sign all commits by default
+git config --global commit.gpgsign true
+```
+
+GitHub marks signed commits as **Verified**. See [GitHub's signing guide](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits) to set up a key.
 
 ## Commands
 
@@ -80,16 +123,16 @@ git diff --staged
 # Check status
 git status --porcelain
 
-# Stage all changes
-git add .
+# Stage specific files for an atomic commit
+git add src/feature-b/*
 
-# Stage specific files
-git add file1 file2
+# Stage individual hunks (mixed concerns in one file)
+git add -p src/file-with-mixed-changes
 
 # Commit with message
 git commit -m "type(scope): description"
 
-# Multi-line commit
+# Multi-line commit (body is mandatory in this skill)
 git commit -m "$(cat <<'EOF'
 type(scope): description
 
@@ -98,6 +141,27 @@ Body text here
 Footer: reference
 EOF
 )"
+
+# Unstage everything (keep changes in working tree)
+git restore --staged .
+
+# Unstage a single file
+git restore --staged path/to/file
+
+# Amend last commit message (before pushing)
+git commit --amend -m "type(scope): corrected message"
+
+# Add forgotten files to last commit (before pushing)
+git add forgotten-file.ts && git commit --amend --no-edit
+
+# Create fixup commit for later rebase
+git commit --fixup HEAD~2
+
+# Autosquash fixup commits during rebase
+git rebase -i --autosquash HEAD~5
+
+# Preview the commit without creating it
+git commit --dry-run
 ```
 
 ## Conventional Commit Format
@@ -110,7 +174,7 @@ EOF
 [optional footer(s)]
 ```
 
-**Note:** A blank line is REQUIRED between description and body. Body is mandatory (see exceptions below).
+**Note:** A blank line is REQUIRED between description and body. Body is mandatory — explain the **why**, not just the **what**.
 
 ## Commit Types
 
@@ -244,6 +308,19 @@ Add rate limiting
 Footer is **optional**. Use for:
 - Breaking changes: `BREAKING CHANGE: <description>`
 - Issue references: `Closes #123`, `Refs #456`
+
+## Related Skills
+
+| Skill | When to Use |
+|-------|-------------|
+| `work-unit-commits` | Plan commits as reviewable slices — use **before** writing code |
+| `chained-pr` | Split large changes into stacked PRs that protect review focus |
+
+## Resources
+
+- [Conventional Commits specification](https://www.conventionalcommits.org/)
+- [Git commit docs](https://git-scm.com/docs/git-commit)
+- [GitHub — signing commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
 
 ## Git Safety Protocol
 
