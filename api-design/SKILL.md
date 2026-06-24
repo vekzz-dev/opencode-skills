@@ -3,7 +3,7 @@ name: api-design
 description: >
   REST API design best practices: resource naming, versioning, error handling, pagination, HATEOAS, rate limiting, OpenAPI documentation.
   Trigger: API design, REST API, endpoint, OpenAPI, RESTful, API versioning, or API documentation.
-license: Apache-2.0
+license: MIT
 metadata:
   author: vekzz-dev
   version: "1.0"

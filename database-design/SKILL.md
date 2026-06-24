@@ -3,7 +3,7 @@ name: database-design
 description: >
   General database design principles: modeling, normalization, indexing, naming conventions, migrations, and query optimization.
   Trigger: Database design, data modeling, schema design, table design, or migration planning.
-license: Apache-2.0
+license: MIT
 metadata:
   author: vekzz-dev
   version: "1.1"

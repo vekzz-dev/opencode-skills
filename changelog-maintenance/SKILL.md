@@ -3,7 +3,7 @@ name: changelog-maintenance
 description: >
   Organize and document software releases with semantic versioning and standardized changelog formats.
   Trigger: When user asks to update changelog, create release notes, or prepare a release.
-license: Apache-2.0
+license: MIT
 metadata:
   author: vekzz-dev
   version: "1.0"

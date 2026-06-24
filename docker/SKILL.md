@@ -3,7 +3,7 @@ name: docker
 description: >
   Docker and containerization best practices: multi-stage builds, docker-compose, networking, volumes, security, and image optimization.
   Trigger: Docker, Dockerfile, docker-compose, container, image build, or containerization.
-license: Apache-2.0
+license: MIT
 metadata:
   author: vekzz-dev
   version: "1.0"

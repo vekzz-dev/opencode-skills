@@ -3,7 +3,7 @@ name: git-commit
 description: >
   Execute atomic git commits with conventional commit message analysis, intelligent staging, and message generation.
   Trigger: When user asks to commit changes, create a git commit, or mentions "/commit".
-license: Apache-2.0
+license: MIT
 metadata:
   author: vekzz-dev
   version: "1.2"

@@ -3,7 +3,7 @@ name: update-readme
 description: >
   Keep README.md files up-to-date with automatic detection of outdated content and automated updates.
   Trigger: When user asks to update README, detect outdated content, or maintain documentation.
-license: Apache-2.0
+license: MIT
 metadata:
   author: vekzz-dev
   version: "1.0"

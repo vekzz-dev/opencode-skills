@@ -3,7 +3,7 @@ name: java-springboot
 description: >
   Comprehensive best practices for developing high-quality Spring Boot applications with production-ready patterns.
   Trigger: When developing Spring Boot applications, need best practices, or working with Spring framework.
-license: Apache-2.0
+license: MIT
 metadata:
   author: vekzz-dev
   version: "2.0"

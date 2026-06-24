@@ -3,7 +3,7 @@ name: ui-components
 description: >
   Pre-built UI component libraries for server-rendered HTML: Preline UI, HyperUI, Flowbite. Modals, tables, forms, navbars, dropdowns — no React, no build step.
   Trigger: UI components, component library, Preline, HyperUI, Flowbite, Tailwind CSS components, pre-built UI.
-license: Apache-2.0
+license: MIT
 metadata:
   author: vekzz-dev
   version: "1.0"

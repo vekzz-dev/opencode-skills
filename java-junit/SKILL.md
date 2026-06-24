@@ -3,7 +3,7 @@ name: java-junit
 description: >
   Best practices for JUnit 5 unit testing, including data-driven tests and modern patterns.
   Trigger: When writing JUnit tests, creating unit tests, or need testing best practices.
-license: Apache-2.0
+license: MIT
 metadata:
   author: vekzz-dev
   version: "1.1"

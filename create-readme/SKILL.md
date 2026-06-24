@@ -3,7 +3,7 @@ name: create-readme
 description: >
   Create comprehensive, well-structured README.md files adapted to the project type.
   Trigger: When user asks to create README, generate documentation, or initialize project docs.
-license: Apache-2.0
+license: MIT
 metadata:
   author: vekzz-dev
   version: "1.0"

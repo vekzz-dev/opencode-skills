@@ -3,7 +3,7 @@ name: web-mvc
 description: >
   Server-side web UI with Spring Boot: Thymeleaf templates, HTMX for dynamic interactions, Alpine.js for client-side behavior. No React, no webpack.
   Trigger: Thymeleaf, HTMX, Alpine.js, Spring MVC template, server-side rendering, web UI.
-license: Apache-2.0
+license: MIT
 metadata:
   author: vekzz-dev
   version: "1.0"
