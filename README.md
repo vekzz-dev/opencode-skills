@@ -33,23 +33,24 @@ skill-name/
 
 ## Installation
 
-**Recommended** — use [slap-skills](https://github.com/vekzz-dev/slap-skills) to install, update, and manage individual skills on demand:
+**Recommended** — use [slap-skills](https://github.com/vekzz-dev/slap-skills) to sync skills from this (or any) git repo directly to your OpenCode directory:
 
 ```bash
-# Install a single skill
-slap install latex
+# 1. Install slap-skills
+brew tap vekzz-dev/tap
+brew install slap-skills
 
-# Install multiple at once
-slap install docker api-design web-mvc
+# 2. Add this repo as a source
+slap source add --alias opencode-skills https://github.com/vekzz-dev/opencode-skills
 
-# List available skills
-slap search
+# 3. Pick which skills to install
+slap install
 
-# Update all installed skills
-slap update
+# 4. Keep them updated
+slap sync
 ```
 
-`slap-skills` is a CLI tool that downloads skills directly from this repo to your OpenCode skills directory, keeps them updated, and lets you cherry-pick only what you need — no cloning the entire collection.
+`slap-skills` manages skills from any git repo — public or private. Add this repo as a source, select the skills you want, and `slap sync` keeps them updated. No cloning the whole collection, no manual `cp`. It also detects drift, warns on local edits, and survives corrupt manifests.
 
 ---
 
