@@ -48,6 +48,12 @@ Or clone directly:
 git clone https://github.com/vekzz-dev/opencode-skills.git ~/.config/opencode/skills/opencode-skills
 ```
 
+Or install individual skills with [slap-skills](https://github.com/vekzz-dev/slap-skills):
+
+```bash
+slap install latex
+```
+
 ## Usage
 
 Skills are loaded automatically based on context triggers defined in each `SKILL.md` frontmatter. You can also reference them explicitly when prompting your agent.
