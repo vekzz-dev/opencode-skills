@@ -41,6 +41,8 @@ brew tap vekzz-dev/tap
 brew install slap-skills
 
 # 2. Add this repo as a source
+# Si es primera vez: `slap init` — el wizard te pide la URL y la configura todo
+# Si ya tienes fuentes configuradas: `slap source add`
 slap source add --alias opencode-skills https://github.com/vekzz-dev/opencode-skills
 
 # 3. Pick which skills to install
