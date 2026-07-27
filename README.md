@@ -33,25 +33,34 @@ skill-name/
 
 ## Installation
 
-Copy the skill folders to your OpenCode skills directory:
+**Recommended** — use [slap-skills](https://github.com/vekzz-dev/slap-skills) to install, update, and manage individual skills on demand:
 
 ```bash
-# User-level skills
-cp -r api-design changelog-maintenance create-readme database-design docker git-commit java-junit \
-  java-springboot java-springboot-testing latex ui-components update-readme web-mvc \
-  ~/.config/opencode/skills/
-```
-
-Or clone directly:
-
-```bash
-git clone https://github.com/vekzz-dev/opencode-skills.git ~/.config/opencode/skills/opencode-skills
-```
-
-Or install individual skills with [slap-skills](https://github.com/vekzz-dev/slap-skills):
-
-```bash
+# Install a single skill
 slap install latex
+
+# Install multiple at once
+slap install docker api-design web-mvc
+
+# List available skills
+slap search
+
+# Update all installed skills
+slap update
+```
+
+`slap-skills` is a CLI tool that downloads skills directly from this repo to your OpenCode skills directory, keeps them updated, and lets you cherry-pick only what you need — no cloning the entire collection.
+
+---
+
+You can also install manually:
+
+```bash
+# Clone the whole collection
+git clone https://github.com/vekzz-dev/opencode-skills.git ~/.config/opencode/skills/opencode-skills
+
+# Or copy specific skills
+cp -r latex ~/.config/opencode/skills/
 ```
 
 ## Usage
