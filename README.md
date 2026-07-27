@@ -15,6 +15,7 @@ A collection of AI agent skills for [OpenCode](https://github.com/opencode-ai/op
 | [java-junit](java-junit/) | JUnit 5 best practices: parameterized tests, assertions, mocking |
 | [java-springboot](java-springboot/) | Spring Boot production patterns: DI, REST, security, caching |
 | [java-springboot-testing](java-springboot-testing/) | Test slices, MockMvcTester, Testcontainers, AssertJ |
+| [latex](latex/) | Compile-safe LaTeX academic documents: articles, theses, essays, guides |
 | [ui-components](ui-components/) | Preline UI, HyperUI, Flowbite — component libraries for Thymeleaf + HTMX |
 | [update-readme](update-readme/) | Detect and update outdated README content |
 | [web-mvc](web-mvc/) | Thymeleaf + HTMX + Alpine.js — server-side web UIs without React |
@@ -37,7 +38,7 @@ Copy the skill folders to your OpenCode skills directory:
 ```bash
 # User-level skills
 cp -r api-design changelog-maintenance create-readme database-design docker git-commit java-junit \
-  java-springboot java-springboot-testing ui-components update-readme web-mvc \
+  java-springboot java-springboot-testing latex ui-components update-readme web-mvc \
   ~/.config/opencode/skills/
 ```
 
