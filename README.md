@@ -18,6 +18,7 @@ A collection of AI agent skills for [OpenCode](https://github.com/opencode-ai/op
 | [latex](latex/) | Compile-safe LaTeX academic documents: articles, theses, essays, guides |
 | [ui-components](ui-components/) | Preline UI, HyperUI, Flowbite — component libraries for Thymeleaf + HTMX |
 | [update-readme](update-readme/) | Detect and update outdated README content |
+| [vault-tech-note](vault-tech-note/) | Learning-first tech notes for an Obsidian vault: verified sources, mental models, worked examples |
 | [web-mvc](web-mvc/) | Thymeleaf + HTMX + Alpine.js — server-side web UIs without React |
 
 ## Structure
