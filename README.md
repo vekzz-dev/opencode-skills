@@ -6,20 +6,20 @@ A collection of AI agent skills for [OpenCode](https://github.com/opencode-ai/op
 
 | Skill | Description |
 |-------|-------------|
-| [api-design](api-design/) | REST API design: resource naming, versioning, error handling, pagination, HATEOAS, OpenAPI |
-| [changelog-maintenance](changelog-maintenance/) | Semantic versioning, changelogs, and release notes |
-| [create-readme](create-readme/) | Generate comprehensive README files for any project type |
-| [database-design](database-design/) | Database modeling, normalization, indexing, migrations, query optimization |
-| [docker](docker/) | Multi-stage builds, docker-compose, security, image optimization |
-| [git-commit](git-commit/) | Conventional commits with intelligent staging and message generation |
-| [java-junit](java-junit/) | JUnit 5 best practices: parameterized tests, assertions, mocking |
-| [java-springboot](java-springboot/) | Spring Boot production patterns: DI, REST, security, caching |
-| [java-springboot-testing](java-springboot-testing/) | Test slices, MockMvcTester, Testcontainers, AssertJ |
-| [latex](latex/) | Compile-safe LaTeX academic documents: articles, theses, essays, guides |
-| [ui-components](ui-components/) | Preline UI, HyperUI, Flowbite — component libraries for Thymeleaf + HTMX |
-| [update-readme](update-readme/) | Detect and update outdated README content |
-| [vault-tech-note](vault-tech-note/) | Learning-first tech notes for an Obsidian vault: verified sources, mental models, worked examples |
-| [web-mvc](web-mvc/) | Thymeleaf + HTMX + Alpine.js — server-side web UIs without React |
+| [api-design](skills/api-design/) | REST API design: resource naming, versioning, error handling, pagination, HATEOAS, OpenAPI |
+| [changelog-maintenance](skills/changelog-maintenance/) | Semantic versioning, changelogs, and release notes |
+| [create-readme](skills/create-readme/) | Generate comprehensive README files for any project type |
+| [database-design](skills/database-design/) | Database modeling, normalization, indexing, migrations, query optimization |
+| [docker](skills/docker/) | Multi-stage builds, docker-compose, security, image optimization |
+| [git-commit](skills/git-commit/) | Conventional commits with intelligent staging and message generation |
+| [java-junit](skills/java-junit/) | JUnit 5 best practices: parameterized tests, assertions, mocking |
+| [java-springboot](skills/java-springboot/) | Spring Boot production patterns: DI, REST, security, caching |
+| [java-springboot-testing](skills/java-springboot-testing/) | Test slices, MockMvcTester, Testcontainers, AssertJ |
+| [latex](skills/latex/) | Compile-safe LaTeX academic documents: articles, theses, essays, guides |
+| [ui-components](skills/ui-components/) | Preline UI, HyperUI, Flowbite — component libraries for Thymeleaf + HTMX |
+| [update-readme](skills/update-readme/) | Detect and update outdated README content |
+| [vault-tech-note](skills/vault-tech-note/) | Learning-first tech notes for an Obsidian vault: verified sources, mental models, worked examples |
+| [web-mvc](skills/web-mvc/) | Thymeleaf + HTMX + Alpine.js — server-side web UIs without React |
 
 ## Structure
 
@@ -64,7 +64,7 @@ You can also install manually:
 git clone https://github.com/vekzz-dev/opencode-skills.git ~/.config/opencode/skills/opencode-skills
 
 # Or copy specific skills
-cp -r latex ~/.config/opencode/skills/
+cp -r skills/latex ~/.config/opencode/skills/
 ```
 
 ## Usage
