@@ -34,26 +34,37 @@ skill-name/
 
 ## Installation
 
-**Recommended** — use [slap-skills](https://github.com/vekzz-dev/slap-skills) to sync skills from this (or any) git repo directly to your OpenCode directory:
+**Recommended** — use [`skills`](https://github.com/vercel-labs/skills), the open agent skills CLI from Vercel Labs. It installs skills from any git repo into your agent directory and keeps them up to date:
 
 ```bash
-# 1. Install slap-skills
-brew tap vekzz-dev/tap
-brew install slap-skills
+# 1. See what's available in this repo
+npx skills add vekzz-dev/opencode-skills --list
 
-# 2. Add this repo as a source
-# First time? Run `slap init` — the wizard asks for the URL and sets everything up.
-# Already have sources configured? Use `slap source add`.
-slap source add --alias opencode-skills https://github.com/vekzz-dev/opencode-skills
+# 2. Install everything globally for OpenCode
+npx skills add vekzz-dev/opencode-skills --all -a opencode
 
-# 3. Pick which skills to install
-slap install
+# Or pick specific skills
+npx skills add vekzz-dev/opencode-skills --skill latex --skill docker -g -a opencode
 
-# 4. Keep them updated
-slap sync
+# 3. Keep them updated
+npx skills update
 ```
 
-`slap-skills` manages skills from any git repo — public or private. Add this repo as a source, select the skills you want, and `slap sync` keeps them updated. No cloning the whole collection, no manual `cp`. It also detects drift, warns on local edits, and survives corrupt manifests.
+Skills are installed by default with symlinks to a single canonical copy, so an update is reflected everywhere. Pass `--copy` if your setup does not support symlinks.
+
+Useful flags:
+
+| Flag           | Description                                                    |
+| -------------- | -------------------------------------------------------------- |
+| `-g, --global` | Install to `~/.config/opencode/skills/` instead of the project  |
+| `-a, --agent`  | Target specific agents (e.g. `opencode`, `claude-code`)        |
+| `-s, --skill`  | Install specific skills by name (use `'*'` for all)            |
+| `-l, --list`   | List available skills without installing                       |
+| `--copy`       | Copy files instead of symlinking                                |
+| `-y, --yes`    | Skip all confirmation prompts                                   |
+| `--all`        | Install all skills to all agents without prompts                |
+
+`skills` also works with private repositories (it reuses your configured Git, GitHub CLI, or SSH credentials), GitLab, Azure Repos, and local paths.
 
 ---
 
