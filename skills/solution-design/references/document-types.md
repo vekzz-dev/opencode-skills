@@ -1,75 +1,75 @@
-# Tipos de artefactos y límites de responsabilidad
+# Artifact types and responsibility boundaries
 
-Los nombres no son universales en todos los equipos. Usa estas definiciones operativas y respeta las convenciones establecidas en el proyecto. **Un tipo de artefacto no equivale necesariamente a un archivo.** Un proyecto pequeño puede contener varias de estas responsabilidades en secciones de `project-design.md`; sepáralas cuando se requieran revisión, ownership, versionado o evolución independientes.
+Names are not universal across teams. Use these operational definitions and respect the conventions established in the project. **An artifact type is not necessarily a file.** A small project can hold several of these responsibilities as sections of `project-design.md`; separate them when independent review, ownership, versioning, or evolution is required.
 
 ## PRD — Product Requirements Document
 
-**Pregunta:** ¿Qué problema se resolverá, para quién y qué debe hacer el producto?
+**Question:** What problem will be solved, for whom, and what must the product do?
 
-Suele incluir objetivo, usuarios/actores y sus necesidades, alcance/exclusiones, casos de uso, requisitos funcionales, criterios de aceptación, reglas de negocio, requisitos de calidad desde la perspectiva del producto, métricas, restricciones y preguntas abiertas. **Cuando haya diferencias de acceso, incluye roles y permisos funcionales:** qué acciones puede realizar cada tipo de usuario, qué restricciones existen y, si aporta claridad, una matriz de roles y permisos. Considera también acceso anónimo/autenticado y reglas de propiedad de recursos cuando corresponda.
+Usually includes objective, users/actors and their needs, scope/exclusions, use cases, functional requirements, acceptance criteria, business rules, quality requirements from the product perspective, metrics, constraints, and open questions. **When access differences exist, include functional roles and permissions:** which actions each user type can perform, which restrictions exist, and, if it adds clarity, a roles-and-permissions matrix. Also consider anonymous/authenticated access and resource-ownership rules where appropriate.
 
-No inventes roles, privilegios ni requisitos de autorización que no estén respaldados por el contexto; registra lo desconocido como pregunta abierta. Si todos los usuarios tienen las mismas capacidades o el sistema no requiere control de acceso, no fuerces una matriz. El PRD define el comportamiento requerido, no el mecanismo técnico. No debe convertirse en una especificación detallada de tablas SQL, clases, frameworks o arquitectura interna. En un proyecto pequeño puede ser una sección de `project-design.md`.
+Never invent roles, privileges, or authorization requirements unsupported by the context; record the unknown as an open question. If all users have the same capabilities or the system requires no access control, do not force a matrix. The PRD defines required behavior, not the technical mechanism. It must not become a detailed specification of SQL tables, classes, frameworks, or internal architecture. On a small project it can be a section of `project-design.md`.
 
 ## SDD — System Design Document
 
-**Pregunta:** ¿Cómo se organiza técnicamente el sistema como conjunto?
+**Question:** How is the system technically organized as a whole?
 
-Suele incluir contexto y alcance técnico, arquitectura de alto nivel, componentes, límites de módulos o servicios, flujos principales, integraciones, seguridad (incluida la estrategia técnica de autenticación y autorización cuando aplique), atributos de calidad, despliegue y referencias al diseño de datos/API.
+Usually includes technical context and scope, high-level architecture, components, module/service boundaries, main flows, integrations, security (including the technical authentication and authorization strategy when applicable), quality attributes, deployment, and references to the data/API design.
 
-Puede ser una sección de un documento integrado en proyectos sencillos. Sepáralo cuando su arquitectura necesite revisión o mantenimiento independiente.
+It can be a section of an integrated document on simple projects. Separate it when its architecture needs independent review or maintenance.
 
 ## TDD — Technical Design Document
 
-**Pregunta:** ¿Cómo implementaremos una funcionalidad o cambio técnico concreto?
+**Question:** How will we implement a concrete feature or technical change?
 
-Suele incluir contexto del cambio, requisitos/restricciones, solución propuesta, alternativas, componentes afectados, flujo, cambios de API y datos, errores, seguridad, pruebas, despliegue y riesgos.
+Usually includes change context, requirements/constraints, proposed solution, alternatives, affected components, flow, API and data changes, errors, security, testing, deployment, and risks.
 
-No crees un TDD por cada tarea pequeña. Úsalo cuando las decisiones técnicas de una funcionalidad merezcan una propuesta revisable. TDD también significa *Test-Driven Development*; escribe el término completo cuando haya ambigüedad.
+Never create a TDD for every small task. Use it when a feature's technical decisions deserve a reviewable proposal. TDD also means *Test-Driven Development*; write out the full term when ambiguity exists.
 
 ## DBDD — Database Design Document
 
-**Pregunta:** ¿Cómo se modelan, relacionan, restringen y persisten los datos?
+**Question:** How are the data modeled, related, constrained, and persisted?
 
-Suele incluir motor conocido, modelos conceptual/lógico/físico, ERD, tablas y columnas, claves, relaciones, restricciones, índices, diccionario de datos, integridad, migraciones y consideraciones de rendimiento, privacidad, retención o auditoría cuando apliquen.
+Usually includes known engine, conceptual/logical/physical models, ERD, tables and columns, keys, relationships, constraints, indexes, data dictionary, integrity, migrations, and performance, privacy, retention, or audit considerations when applicable.
 
-En un proyecto pequeño puede ser una sección o una tabla concisa dentro de `project-design.md`. Sepáralo si el esquema es complejo, se revisa por separado, tiene cambios delicados o lo consumen distintos equipos.
+On a small project it can be a section or a concise table within `project-design.md`. Separate it if the schema is complex, reviewed separately, has delicate changes, or is consumed by different teams.
 
-## Contrato de API — por ejemplo, OpenAPI
+## API contract — for example, OpenAPI
 
-**Pregunta:** ¿Cómo interactúan los consumidores con la API?
+**Question:** How do consumers interact with the API?
 
-Define operaciones, rutas, parámetros, esquemas de solicitud y respuesta, autenticación, errores y códigos HTTP. Usa OpenAPI como fuente estructurada de verdad cuando el contrato necesite compartirse, validarse o versionarse. No siempre aporta valor como archivo aparte para una API pequeña de uso local y sin consumidores independientes.
+Defines operations, routes, parameters, request/response schemas, authentication, errors, and HTTP codes. Use OpenAPI as the structured source of truth when the contract needs to be shared, validated, or versioned. It does not always add value as a separate file for a small, locally used API with no independent consumers.
 
 ## ADR — Architecture Decision Record
 
-**Pregunta:** ¿Qué decisión técnica relevante se tomó, por qué y qué consecuencias tiene?
+**Question:** Which relevant technical decision was made, why, and what are its consequences?
 
-Registra contexto, opciones relevantes, decisión, consecuencias y estado. Un ADR puede ser breve y vale la pena cuando una decisión importante sea difícil de revertir, incluso en un proyecto pequeño. No registres como ADR todas las decisiones triviales.
+Records context, relevant options, decision, consequences, and status. An ADR can be brief and is worthwhile when an important decision is hard to reverse, even on a small project. Never record every trivial decision as an ADR.
 
-## README y guía operativa
+## README and operational guide
 
-**Pregunta:** ¿Cómo se instala, configura, ejecuta y prueba este repositorio?
+**Question:** How is this repository installed, configured, run, and tested?
 
-El README documenta preparación y uso práctico. No debe duplicar todo el diseño del sistema; enlaza al documento de diseño canónico cuando sea necesario.
+The README documents setup and practical use. It must not duplicate the whole system design; link to the canonical design document when needed.
 
-## Cómo elegir qué separar
+## How to choose what to separate
 
-Mantén las responsabilidades en un documento integrado si son cortas, cambian juntas, tienen los mismos lectores y la separación solo añade navegación o duplicación. Separa un artefacto cuando uno o varios de estos factores lo justifiquen:
+Keep responsibilities in one integrated document when they are short, change together, have the same readers, and separation only adds navigation or duplication. Separate an artifact when one or more of these factors justify it:
 
-- Tiene consumidores o revisores distintos.
-- Debe validarse, versionarse o publicarse con una herramienta especializada.
-- Es suficientemente complejo como para navegarlo de forma independiente.
-- Cambia a un ritmo distinto o tiene ownership independiente.
-- Requiere trazabilidad, auditoría o controles de acceso específicos.
-- Separarlo reduce la duplicación o los riesgos de inconsistencias.
+- It has distinct consumers or reviewers.
+- It must be validated, versioned, or published with a specialized tool.
+- It is complex enough to warrant independent navigation.
+- It changes at a different cadence or has independent ownership.
+- It requires traceability, auditing, or specific access controls.
+- Separating it reduces duplication or inconsistency risks.
 
-Preguntas rápidas:
+Quick questions:
 
-- “¿Qué debe hacer el producto?” → PRD, o sección de requisitos.
-- “¿Cómo se organiza el sistema?” → SDD, o sección de arquitectura.
-- “¿Cómo resolveremos este cambio complejo?” → TDD.
-- “¿Qué tablas, relaciones, tipos y restricciones necesitamos?” → DBDD, o sección de datos.
-- “¿Qué operaciones y esquemas expone la API?” → contrato de API/OpenAPI si es útil.
-- “¿Por qué elegimos esta arquitectura o tecnología?” → ADR si la decisión importa.
+- "What must the product do?" → PRD, or a requirements section.
+- "How is the system organized?" → SDD, or an architecture section.
+- "How will we implement this complex change?" → TDD.
+- "Which tables, relationships, types, and constraints do we need?" → DBDD, or a data section.
+- "Which operations and schemas does the API expose?" → API contract/OpenAPI if useful.
+- "Why did we choose this architecture or technology?" → ADR if the decision matters.
 
-Combinar es válido; duplicar la fuente de verdad no. Mantén nombres, contratos y decisiones canónicos en un solo lugar y enlaza desde otros artefactos.
+Combining is valid; duplicating the source of truth is not. Keep names, contracts, and decisions canonical in one place and link from other artifacts.

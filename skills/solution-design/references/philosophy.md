@@ -1,53 +1,53 @@
-# Filosofía y razonamiento de fondo
+# Philosophy and underlying reasoning
 
-Referencia de apoyo para `SKILL.md`. Contiene la motivación y el razonamiento detrás de las reglas. Úsala cuando necesites justificar una decisión, adaptar una regla a un caso que no cubre, o explicar el enfoque al usuario. No añade requisitos nuevos.
+Supporting reference for `SKILL.md`. Contains the motivation and reasoning behind the rules. Use it when you need to justify a decision, adapt a rule to a case it does not cover, or explain the approach to the user. It adds no new requirements.
 
-## La meta real: menos ambigüedad, no más documentos
+## The real goal: less ambiguity, not more documents
 
-La meta es reducir ambigüedad y facilitar decisiones seguras, no producir la mayor cantidad posible de documentación. La ingeniería puede ser rigurosa sin burocracia: en un proyecto pequeño, un documento bien organizado puede contener los elementos esenciales del PRD, SDD y DBDD. Un PDF de 40 páginas que nadie lee y que se desincroniza del código es documentación muerta; una página viva, verificable y actualizada vale más.
+The goal is to reduce ambiguity and enable safe decisions, not to produce the largest possible amount of documentation. Engineering can be rigorous without bureaucracy: on a small project, one well-organized document can hold the essential elements of the PRD, SDD, and DBDD. A 40-page PDF nobody reads and that drifts away from the code is dead documentation; a living, verifiable, updated page is worth more.
 
-## Los tipos describen responsabilidades, no archivos
+## Types describe responsibilities, not files
 
-Un error común es tratar la lista de artefactos (PRD, SDD, DBDD, TDD, ADR) como una lista de archivos obligatorios. Es una lista de **responsabilidades de contenido**. Un proyecto pequeño cumple el PRD con una sección del documento integrado; un sistema grande separa el mismo contenido porque hay revisores, ownership y evolución distintos. Pregunta siempre: ¿qué pregunta responde este artefacto y quién la lee? Los detalles por tipo están en `document-types.md`.
+A common mistake is treating the artifact list (PRD, SDD, DBDD, TDD, ADR) as a list of mandatory files. It is a list of **content responsibilities**. A small project fulfills the PRD with a section of the integrated document; a large system separates the same content because there are different reviewers, ownership, and evolution. Always ask: what question does this artifact answer, and who reads it? Per-type details are in `document-types.md`.
 
-## Rigor ≠ volumen
+## Rigor ≠ volume
 
-Incluso en nivel riguroso, no rellenes plantillas sin propósito. El rigor significa que las decisiones y controles relevantes estén definidos y verificables, no que cada tema tenga un archivo propio. Un sistema crítico bien documentado demuestra su rigor con decisiones trazables y controles verificables, no con longitud.
+Even at the rigorous level, never fill templates without purpose. Rigor means the relevant decisions and controls are defined and verifiable, not that every topic has its own file. A well-documented critical system demonstrates its rigor with traceable decisions and verifiable controls, not with length.
 
-## Por qué "no inventes" ocupa el lugar central
+## Why "never invent" is central
 
-Un invento documentado se convierte en verdad de referencia para quien no puede verificarlo: alguien implementa la tabla que nunca existió, o asume un objetivo de rendimiento que nadie fijó. Por eso la separación hechos / decisiones / propuestas / supuestos / preguntas no es formato decorativo: es el mecanismo que evita fabricar certeza. En descubrimiento, lo mismo aplica a usuarios, actores, roles y permisos: documenta lo confirmado, marca lo desconocido como pendiente, y si no hay diferencias de acceso relevantes, no fuerces una matriz.
+A documented invention becomes reference truth for whoever cannot verify it: someone implements the table that never existed, or assumes a performance target nobody set. That is why the facts / decisions / proposals / assumptions / questions separation is not decorative formatting: it is the mechanism that prevents manufacturing certainty. In discovery, the same applies to users, actors, roles, and permissions: document what is confirmed, mark the unknown as pending, and if there are no relevant access differences, do not force a matrix.
 
-## Por qué no "des por hecha" la arquitectura
+## Why never assume an architecture
 
-Recomendar microservicios, un ORM, un framework o una infraestructura sin contexto es imponer presupuesto técnico a alguien que aún no definió el problema. Las decisiones de arquitectura tienen costes de reversión asimétricos: cuanto más cargada la apuesta y menos contexto, más caro el error. Explica trade-offs en proporción al impacto real de la decisión.
+Recommending microservices, an ORM, a framework, or infrastructure without context imposes a technical budget on someone who has not yet defined the problem. Architecture decisions have asymmetric reversal costs: the bigger the bet and the less context, the costlier the error. Explain trade-offs in proportion to the decision's real impact.
 
-## La estructura sigue a los consumidores (no a la plantilla)
+## Structure follows consumers (not the template)
 
-El criterio para separar artefactos no es la complejidad por sí misma, sino quién consume la información y cómo: revisores distintos, versionado, validación con herramientas, ownership independiente, auditoría. Cuando esos factores no existen, la separación solo añade navegación, duplicación y desincronización. Por eso el nivel se elige por factores de riesgo (complejidad del dominio, impacto de fallos, datos, integraciones, colaboradores) y no por tamaño.
+The criterion for separating artifacts is not complexity itself, but who consumes the information and how: different reviewers, versioning, tool-based validation, independent ownership, auditing. When those factors are absent, separation only adds navigation, duplication, and desynchronization. That is why the level is chosen by risk factors (domain complexity, failure impact, data, integrations, collaborators) and not by size.
 
-## Documentar ≠ validar, iterar ≠ no diseñar
+## Documenting ≠ validating, iterating ≠ not designing
 
-Dos confusiones simétricas:
+Two symmetric confusions:
 
-- Creer que escribir el diseño lo valida: solo el código, las pruebas o la revisión verifican. Un documento no implementado ni probado es una hipótesis.
-- Exigir diseño exhaustivo antes de programar: el diseño sirve para reducir riesgos relevantes, no para eliminarlos todos. Diseña lo suficiente, implementa incrementos verificables, actualiza al aprender.
+- Believing that writing the design validates it: only code, tests, or review verify. An unimplemented, untested document is a hypothesis.
+- Demanding exhaustive design before coding: design exists to reduce relevant risks, not to eliminate them all. Design enough, implement verifiable increments, update as you learn.
 
-## 12 principios originales (v1.2.1) — mapeo a reglas actuales
+## Original 12 principles (v1.2.1) — mapping to current rules
 
-Los principios de la versión 1.2.1 se condensaron en las Hard Rules; este es el trazado para auditoría:
+The v1.2.1 principles were condensed into the Hard Rules; this is the audit trail:
 
-| v1.2.1 | Ahora |
+| v1.2.1 | Now |
 |---|---|
-| 1. Empieza por la intención | Hard Rule 1 |
-| 2. Inspecciona antes de escribir | Hard Rule 2 |
-| 3. No inventes hechos | Hard Rule 3 (+ filosofía arriba) |
-| 4. Adapta el rigor al riesgo | Decision Gate "Nivel de documentación" |
-| 5. Documentación mínima suficiente | Hard Rule 5 |
-| 6. Combina antes de fragmentar | Hard Rule 5 + Decision Gate "Separar o combinar" |
-| 7. Una sola fuente de verdad | Hard Rule 6 |
-| 8. Diseña iterativamente | Hard Rule 7 (+ filosofía arriba) |
-| 9. Documenta decisiones, no cada detalle | Hard Rule 8 |
-| 10. No des por hecha la arquitectura | Hard Rule 4 |
-| 11. Adapta idioma y convenciones | Hard Rule 10 |
-| 12. Documentar ≠ validar | Hard Rule 9 |
+| 1. Start from intent | Hard Rule 1 |
+| 2. Inspect before writing | Hard Rule 2 |
+| 3. Never invent facts | Hard Rule 3 (+ philosophy above) |
+| 4. Adapt rigor to risk | Decision Gate "Documentation level" |
+| 5. Minimum sufficient documentation | Hard Rule 5 |
+| 6. Combine before fragmenting | Hard Rule 5 + Decision Gate "Combine or separate" |
+| 7. One source of truth | Hard Rule 6 |
+| 8. Design iteratively | Hard Rule 7 (+ philosophy above) |
+| 9. Document decisions, not every detail | Hard Rule 8 |
+| 10. Never assume the architecture | Hard Rule 4 |
+| 11. Adapt language and conventions | Hard Rule 10 |
+| 12. Documenting ≠ validating | Hard Rule 9 |

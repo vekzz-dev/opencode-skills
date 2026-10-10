@@ -1,84 +1,84 @@
-# Plantillas orientativas
+# Orientative templates
 
-Usa estas plantillas como esqueletos, no como formularios obligatorios. Omite secciones irrelevantes y no rellenes huecos con información inventada. Elige la plantilla integrada para proyectos ligeros y las plantillas especializadas cuando separar los artefactos aporte valor.
+Use these templates as skeletons, never as mandatory forms. Omit irrelevant sections and never fill gaps with invented information. Pick the integrated template for lightweight projects and the specialized templates when separating artifacts adds value.
 
-## Nivel ligero: Project Design Document integrado
+## Lightweight level: integrated Project Design Document
 
-Úsalo como punto de partida para proyectos pequeños y de bajo riesgo. Es una plantilla de una sola fuente de verdad; no hace falta completar todas las secciones antes de empezar.
+Use it as a starting point for small, low-risk projects. It is a single-source-of-truth template; you do not need to complete every section before starting.
 
 ```markdown
-# Project Design — <nombre>
+# Project Design — <name>
 
-## 1. Resumen
-- Problema que resuelve:
-- Usuarios/actores principales:
-- Resultado esperado:
-- Estado del documento: Draft / In Review / Accepted
+## 1. Summary
+- Problem it solves:
+- Main users/actors:
+- Expected outcome:
+- Document status: Draft / In Review / Accepted
 
-## 2. Alcance del MVP
-### Incluido
-### Excluido
+## 2. MVP scope
+### Included
+### Excluded
 
-## 3. Requisitos y reglas de negocio
-- Requisitos funcionales:
-- Reglas importantes:
-- Criterios de aceptación:
-- Restricciones y requisitos de calidad relevantes:
+## 3. Requirements and business rules
+- Functional requirements:
+- Important rules:
+- Acceptance criteria:
+- Relevant constraints and quality requirements:
 
-## 4. Usuarios, roles, permisos y restricciones de acceso (si aplica)
-- Tipos de usuario/actores y necesidades:
-- Roles de negocio o del sistema confirmados:
-- Acciones permitidas y restricciones por rol:
-- Matriz de roles y permisos, si aporta claridad:
-- Acceso de usuarios anónimos/autenticados y reglas de propiedad de recursos, si aplica:
-- Preguntas abiertas; no asumir roles ni permisos sin evidencia:
+## 4. Users, roles, permissions, and access restrictions (if applicable)
+- User/actor types and needs:
+- Confirmed business or system roles:
+- Allowed actions and restrictions per role:
+- Roles and permissions matrix, if it adds clarity:
+- Anonymous/authenticated user access and resource-ownership rules, if applicable:
+- Open questions; never assume roles or permissions without evidence:
 
-## 5. Diseño de la solución
-- Arquitectura y componentes principales:
-- Responsabilidades y flujo principal:
-- Estrategia técnica de autenticación/autorización (o referencia al diseño de seguridad):
-- Tecnologías ya decididas y razones, si se conocen:
+## 5. Solution design
+- Architecture and main components:
+- Responsibilities and main flow:
+- Technical authentication/authorization strategy (or reference the security design):
+- Technologies already decided and reasons, if known:
 
-## 6. Datos (si aplica)
-- Entidades y relaciones principales:
-- Atributos/restricciones importantes:
-- Diagrama ERD si aporta claridad:
-- Motor de base de datos y migraciones, si se conocen:
+## 6. Data (if applicable)
+- Main entities and relationships:
+- Important attributes/constraints:
+- ERD diagram if it adds clarity:
+- Database engine and migrations, if known:
 
-## 7. API e integraciones (si aplica)
-- Interfaces/endpoints principales:
-- Contratos de entrada y salida:
-- Requisitos funcionales de acceso por operación; los detalles técnicos de implementación van en el diseño técnico:
-- Dependencias externas y fallos relevantes:
+## 7. API and integrations (if applicable)
+- Main interfaces/endpoints:
+- Input/output contracts:
+- Functional access requirements per operation; technical implementation details go in the technical design:
+- External dependencies and relevant failures:
 
-## 8. Seguridad y operación (según riesgo)
-- Autenticación, autorización técnica y datos sensibles:
-- Configuración, despliegue, logging/backups si aplican:
+## 8. Security and operations (risk-dependent)
+- Authentication, technical authorization, and sensitive data:
+- Configuration, deployment, logging/backups if applicable:
 
-## 9. Pruebas y validación
-- Cómo se verifican los criterios de aceptación, incluidos los permisos relevantes:
-- Pruebas prioritarias:
+## 9. Testing and validation
+- How acceptance criteria are verified, including relevant permissions:
+- Priority tests:
 
-## 10. Plan inicial
-- Primer incremento vertical:
-- Dependencias y riesgos:
+## 10. Initial plan
+- First vertical increment:
+- Dependencies and risks:
 
-## 11. Supuestos, decisiones pendientes y referencias
-- Confirmado:
-- Propuesto:
-- Pendiente de definir:
+## 11. Assumptions, pending decisions, and references
+- Confirmed:
+- Proposed:
+- Pending definition:
 ```
 
-Adapta, elimina o renombra secciones. Si no hay base de datos, elimina la sección de datos; si no hay API, elimina esa sección. Si no existen roles ni restricciones de acceso diferenciadas, omite la matriz de permisos y anota brevemente que no aplica solo cuando esa aclaración sea útil. No documentes cada endpoint o columna si todavía no se necesita ese nivel de detalle. En el PRD y en el documento integrado, registra las capacidades y restricciones de acceso desde el punto de vista funcional; deja los mecanismos técnicos (por ejemplo, RBAC/ABAC, JWT, sesiones o configuración del framework) para el diseño del sistema o el TDD.
+Adapt, delete, or rename sections. If there is no database, delete the data section; if there is no API, delete that section. If no distinct roles or access restrictions exist, omit the permissions matrix and note briefly that it does not apply only when that clarification is useful. Do not document every endpoint or column when that level of detail is not yet needed. In the PRD and in the integrated document, record access capabilities and restrictions from the functional point of view; leave the technical mechanisms (for example, RBAC/ABAC, JWT, sessions, or framework configuration) to the system design or the TDD.
 
-## Metadatos comunes para documentos separados
+## Common metadata for separated documents
 
 ```yaml
-# Puede ser una tabla si el proyecto no usa frontmatter.
-title: "<nombre del documento>"
+# Can be a table if the project does not use frontmatter.
+title: "<document name>"
 status: "Draft | In Review | Approved | Superseded"
-version: "<versión o revisión>"
-last_updated: "<fecha ISO 8601>"
+version: "<version or revision>"
+last_updated: "<ISO 8601 date>"
 owners: []
 related_documents: []
 ```
@@ -86,113 +86,113 @@ related_documents: []
 ## PRD
 
 ```markdown
-# Product Requirements Document — <producto>
+# Product Requirements Document — <product>
 
-## 1. Resumen y problema
-## 2. Objetivos y métricas de éxito
-## 3. Usuarios, actores y necesidades
-## 4. Roles, permisos funcionales y restricciones de acceso (si aplica)
-## 5. Alcance e exclusiones
-## 6. Flujos e historias de usuario
-## 7. Requisitos funcionales
-## 8. Reglas de negocio
-## 9. Requisitos de calidad y restricciones
-## 10. Criterios de aceptación
-## 11. Dependencias y riesgos
-## 12. Preguntas abiertas
-## 13. Documentos relacionados
+## 1. Summary and problem
+## 2. Objectives and success metrics
+## 3. Users, actors, and needs
+## 4. Roles, functional permissions, and access restrictions (if applicable)
+## 5. Scope and exclusions
+## 6. Flows and user stories
+## 7. Functional requirements
+## 8. Business rules
+## 9. Quality requirements and constraints
+## 10. Acceptance criteria
+## 11. Dependencies and risks
+## 12. Open questions
+## 13. Related documents
 ```
 
 ## System Design Document
 
 ```markdown
-# System Design Document — <sistema>
+# System Design Document — <system>
 
-## 1. Propósito, alcance y estado actual
-## 2. Contexto y restricciones
-## 3. Arquitectura de alto nivel
-## 4. Componentes y responsabilidades
-## 5. Flujos principales
-## 6. Interfaces e integraciones
-## 7. Modelo de datos (resumen y referencia al DBDD, si existe)
-## 8. Seguridad
-## 9. Atributos de calidad y objetivos conocidos
-## 10. Despliegue y operación
-## 11. Decisiones arquitectónicas y trade-offs
-## 12. Riesgos y preguntas abiertas
-## 13. Documentos relacionados
+## 1. Purpose, scope, and current state
+## 2. Context and constraints
+## 3. High-level architecture
+## 4. Components and responsibilities
+## 5. Main flows
+## 6. Interfaces and integrations
+## 7. Data model (summary and reference to the DBDD, if one exists)
+## 8. Security
+## 9. Quality attributes and known objectives
+## 10. Deployment and operations
+## 11. Architectural decisions and trade-offs
+## 12. Risks and open questions
+## 13. Related documents
 ```
 
 ## Database Design Document
 
 ```markdown
-# Database Design Document — <sistema>
+# Database Design Document — <system>
 
-## 1. Propósito, alcance y motor conocido
-## 2. Convenciones y terminología
-## 3. Modelo conceptual
-## 4. Modelo lógico y ERD
-## 5. Modelo físico
-### Tabla: <nombre>
-| Columna | Tipo | Nulo | Default | Clave/restricción | Descripción |
+## 1. Purpose, scope, and known engine
+## 2. Conventions and terminology
+## 3. Conceptual model
+## 4. Logical model and ERD
+## 5. Physical model
+### Table: <name>
+| Column | Type | Nullable | Default | Key/constraint | Description |
 |---|---|---|---|---|---|
-## 6. Relaciones y cardinalidades
-## 7. Restricciones e integridad de datos
-## 8. Índices y consultas relevantes
-## 9. Diccionario de datos
-## 10. Auditoría, privacidad y retención (si aplica)
-## 11. Transacciones y concurrencia (si aplica)
-## 12. Migraciones y compatibilidad de cambios
-## 13. Supuestos, riesgos y preguntas abiertas
-## 14. Documentos relacionados
+## 6. Relationships and cardinalities
+## 7. Constraints and data integrity
+## 8. Indexes and relevant queries
+## 9. Data dictionary
+## 10. Audit, privacy, and retention (if applicable)
+## 11. Transactions and concurrency (if applicable)
+## 12. Migrations and change compatibility
+## 13. Assumptions, risks, and open questions
+## 14. Related documents
 ```
 
-## Technical Design Document (para un cambio relevante)
+## Technical Design Document (for a significant change)
 
 ```markdown
-# Technical Design Document — <funcionalidad/cambio>
+# Technical Design Document — <feature/change>
 
-## 1. Resumen
-## 2. Contexto y problema técnico
-## 3. Requisitos y restricciones relevantes
-## 4. Diseño propuesto
-## 5. Componentes afectados y flujo
-## 6. Cambios de API/contratos
-## 7. Cambios en persistencia y migraciones
-## 8. Errores, seguridad y observabilidad
-## 9. Alternativas y trade-offs
-## 10. Estrategia de pruebas
-## 11. Despliegue, compatibilidad y rollback
-## 12. Riesgos y preguntas abiertas
-## 13. Documentos relacionados
+## 1. Summary
+## 2. Context and technical problem
+## 3. Relevant requirements and constraints
+## 4. Proposed design
+## 5. Affected components and flow
+## 6. API/contract changes
+## 7. Persistence and migration changes
+## 8. Errors, security, and observability
+## 9. Alternatives and trade-offs
+## 10. Test strategy
+## 11. Deployment, compatibility, and rollback
+## 12. Risks and open questions
+## 13. Related documents
 ```
 
 ## Architecture Decision Record
 
 ```markdown
-# ADR <número>: <decisión>
+# ADR <number>: <decision>
 
-- Estado: Proposed | Accepted | Rejected | Superseded
-- Fecha: <fecha>
-- Decisores: <personas/equipo, si se conoce>
+- Status: Proposed | Accepted | Rejected | Superseded
+- Date: <date>
+- Decision makers: <people/team, if known>
 
-## Contexto
-## Opciones consideradas
-## Decisión
-## Consecuencias positivas y negativas
-## Riesgos
-## Referencias
+## Context
+## Options considered
+## Decision
+## Positive and negative consequences
+## Risks
+## References
 ```
 
-## Revisión antes de entregar
+## Review before delivery
 
-- [ ] La estructura y cantidad de archivos son proporcionales al contexto y al riesgo.
-- [ ] El documento declara propósito, alcance y estado.
-- [ ] Los nombres y decisiones coinciden con la fuente canónica del proyecto.
-- [ ] Supuestos, propuestas y preguntas abiertas están identificados.
-- [ ] Hechos sobre código existente fueron verificados en archivos relevantes.
-- [ ] No se duplicó el contenido completo de otra fuente de verdad.
-- [ ] Los diagramas distinguen estado actual de diseño propuesto.
-- [ ] Cuando aplica, los roles, permisos funcionales y restricciones de acceso están documentados en los requisitos y reflejados en criterios de aceptación/pruebas; la estrategia técnica está en el diseño correspondiente.
-- [ ] Los enlaces apuntan a documentos existentes o se marcan como pendientes.
-- [ ] Se omitieron las secciones y artefactos que no aportan valor.
+- [ ] The structure and number of files are proportional to the context and risk.
+- [ ] The document states purpose, scope, and status.
+- [ ] Names and decisions match the project's canonical source.
+- [ ] Assumptions, proposals, and open questions are identified.
+- [ ] Facts about existing code were verified in the relevant files.
+- [ ] No complete content was duplicated from another source of truth.
+- [ ] Diagrams distinguish current state from proposed design.
+- [ ] Where applicable, roles, functional permissions, and access restrictions are documented in the requirements and reflected in acceptance criteria/tests; the technical strategy lives in the corresponding design.
+- [ ] Links point to existing documents or are marked as pending.
+- [ ] Sections and artifacts that add no value were omitted.

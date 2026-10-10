@@ -1,115 +1,115 @@
 ---
 name: solution-design
-description: "Trigger: solution design, diseño de la solución, software design docs, PRD, SDD, DBDD, TDD, ADR, arquitectura, modelo de datos, requisitos, MVP, greenfield. Guide software engineering from idea to implementation or evolve an existing system, adapting documentation to risk."
+description: "Trigger: solution design, diseño de la solución, diseño de software, PRD, SDD, DBDD, TDD, ADR, architecture, data model, requirements, MVP, greenfield. Guide software engineering from idea to implementation, adapting documentation to risk."
 metadata:
   author: "vekzz-dev"
-  version: "2.1.1"
-  language: "es"
+  version: "2.2.0"
+  language: "en"
   license: "MIT"
 ---
 
 # Solution Design
 
-Contrato de instrucciones para guiar la ingeniería y el diseño de software de proyectos nuevos o existentes. Ayuda a pasar del problema y los requisitos a un diseño validable y un plan de entrega, manteniendo la documentación proporcional al tamaño, complejidad, riesgo y forma de trabajo del proyecto. Los tipos de documento describen responsabilidades; **no implican que cada tipo deba convertirse en un archivo separado**.
+An instruction contract for guiding the engineering and design of new or existing software projects. It helps move from the problem and requirements to a verifiable design and a delivery plan, keeping documentation proportional to the project's size, complexity, risk, and way of working. Document types describe responsibilities; **they do not imply that every type must become a separate file**.
 
 ## Activation Contract
 
-Carga esta skill cuando el usuario:
+Load this skill when the user:
 
-- empieza un proyecto nuevo o una funcionalidad y necesita decidir el diseño;
-- pide documentar arquitectura, datos, API, requisitos (PRD), decisiones (ADR) o plan de entrega;
-- pide "diseño de software", "PRD", "SDD", "design doc", "documentar el sistema" o similar;
-- quiere alinear diseño con un repositorio existente.
+- starts a new project or feature and needs to decide the design;
+- asks to document architecture, data, API, requirements (PRD), decisions (ADR), or a delivery plan;
+- asks for "software design", "PRD", "SDD", "design doc", "document the system", or similar;
+- wants to align design with an existing repository.
 
-No activar para: escribir código sin decisión de diseño que documentar, ni reviews de PR.
+Do not load for: writing code with no design decision to document, or PR reviews.
 
 ## Hard Rules
 
-1. **Empieza por la intención.** Determina primero si el usuario necesita descubrir requisitos, definir el producto, diseñar arquitectura, resolver una decisión, documentar datos o preparar implementación.
-2. **Inspecciona antes de escribir.** Si existe repositorio: revisa estructura, documentación, configuración, modelos, migraciones, pruebas y código relacionado. No reemplaces documentación existente sin comprenderla.
-3. **No inventes.** No inventes reglas de negocio, tablas, campos, endpoints, volúmenes, objetivos de rendimiento, roles, permisos ni controles. Separa explícitamente hechos verificados, decisiones aceptadas, propuestas, supuestos y preguntas abiertas. Lo desconocido e importante queda como "Pendiente de definir".
-4. **No des por hecha una arquitectura.** No recomiendes microservicios, patrones, frameworks, tecnologías ni infraestructura sin contexto suficiente; explica trade-offs en decisiones de impacto.
-5. **Documentación mínima suficiente.** No generes todos los artefactos por defecto; omite secciones irrelevantes. Combina antes de fragmentar: en proyectos pequeños, `project-design.md` integrado. Separa solo por consumidores distintos, complejidad propia, versionado, reutilización o motivos de seguridad/auditoría.
-6. **Una sola fuente de verdad.** Un dato, contrato o decisión tiene una ubicación canónica; otros documentos enlazan o resumen sin copiar.
-7. **Diseño iterativo.** No exijas diseño exhaustivo antes de programar: reduce los riesgos relevantes, implementa incrementos verificables, actualiza al aprender.
-8. **Documenta decisiones, no cada detalle del código.** No dupliques código ni describas cada clase sin necesidad.
-9. **No confundas documentar con validar.** No afirmes haber revisado código, ejecutado pruebas ni verificado requisitos si no lo hiciste.
-10. **Idioma y formato.** Responde en el idioma del usuario, Markdown por defecto, respeta las convenciones del repositorio.
+1. **Start from intent.** First determine whether the user needs to discover requirements, define the product, design architecture, resolve a decision, document data, or prepare implementation.
+2. **Inspect before writing.** If a repository exists: review structure, documentation, configuration, models, migrations, tests, and related code. Never replace existing documentation without understanding it.
+3. **Never invent.** Do not invent business rules, tables, fields, endpoints, volumes, performance targets, roles, permissions, or controls. Explicitly separate verified facts, accepted decisions, proposals, assumptions, and open questions. Unknown but important things stay marked as "Pending definition".
+4. **Never assume an architecture.** Do not recommend microservices, patterns, frameworks, technologies, or infrastructure without sufficient context; explain trade-offs for impactful decisions.
+5. **Minimum sufficient documentation.** Do not generate every artifact by default; omit irrelevant sections. Combine before you fragment: on small projects, an integrated `project-design.md`. Separate only for distinct consumers, inherent complexity, versioning, reuse, or security/audit needs.
+6. **One source of truth.** A fact, contract, or decision has one canonical location; other documents link to it or summarize it without copying.
+7. **Iterative design.** Do not demand exhaustive design before coding: reduce the relevant risks, implement verifiable increments, update as understanding grows.
+8. **Document decisions, not every code detail.** Do not duplicate code or describe every class without a real need.
+9. **Never confuse documenting with validating.** Do not claim you reviewed code, ran tests, or verified requirements if you did not.
+10. **Language and format.** Reply in the user's language, Markdown by default, respect repository conventions.
 
 ## Decision Gates
 
-### Nivel de documentación
+### Documentation level
 
-| Señales observadas | Nivel | Artefactos |
+| Observed signals | Level | Artifacts |
 |---|---|---|
-| Dominio acotado, pocas integraciones, pocas personas, fallo manejable | **Ligero** | `project-design.md` (requisitos+datos+API+arquitectura en secciones) + `README.md`; OpenAPI solo si terceros consumen la API |
-| Varios módulos/flujos, varios colaboradores, integraciones relevantes | **Estándar** | `prd.md` + `system-design.md`; `database-design.md` y `openapi.yaml` solo si aportan detalle independiente; TDDs para cambios complejos, ADRs para decisiones relevantes |
-| Múltiples equipos, dominio complejo, cumplimiento/seguridad/privacidad exigentes, disponibilidad estricta, migraciones delicadas | **Riguroso** | PRD, SDD, DBDD, contratos API, TDDs, ADRs, estrategia de pruebas, despliegue, observabilidad, trazabilidad |
-| Tamaño pequeño pero riesgo alto en un área | Mixto | Rigor solo en las áreas críticas; resto ligero |
-| Contexto insuficiente | Ligero inicial | Registra supuestos y amplía cuando una necesidad concreta lo justifique |
+| Bounded domain, few integrations, few people, manageable failure | **Lightweight** | `project-design.md` (requirements+data+API+architecture as sections) + `README.md`; OpenAPI only if third parties consume the API |
+| Several modules/flows, several collaborators, relevant integrations | **Standard** | `prd.md` + `system-design.md`; `database-design.md` and `openapi.yaml` only if they add independent detail; TDDs for complex changes, ADRs for relevant decisions |
+| Multiple teams, complex domain, demanding compliance/security/privacy, strict availability, delicate migrations | **Rigorous** | PRD, SDD, DBDD, API contracts, TDDs, ADRs, test strategy, deployment, observability, traceability |
+| Small size but high risk in one area | **Mixed** | Rigor only in the critical areas; the rest lightweight |
+| Insufficient context | **Lightweight first** | Record assumptions and expand when a concrete need justifies it |
 
-Factores (evalúa cualitativamente, el tamaño por sí solo no decide): complejidad e incertidumbre del dominio, impacto de fallos y recuperación, sensibilidad/integridad/volumen de datos, integraciones externas, seguridad/privacidad/cumplimiento/disponibilidad/rendimiento, número de colaboradores, probabilidad y coste de cambios. Ajusta el nivel al aprender; comunica solo una justificación breve si cambias los entregables de forma importante.
+Factors (evaluate qualitatively; size alone never decides): domain complexity and uncertainty, failure impact and recoverability, data sensitivity/integrity/volume, external integrations, security/privacy/compliance/availability/performance, number of collaborators, and the probability and cost of change. Adjust the level as you learn; communicate only a brief justification when you materially change the deliverables.
 
-### Separar o combinar un artefacto
+### Combine or separate an artifact
 
-| Factor | Combina en un documento integrado | Separa |
+| Factor | Combine in an integrated document | Separate |
 |---|---|---|
-| Lectores/consumidores | Mismos, pocos | Distintos o revisión independiente |
-| Cambios y ownership | Van juntos, mismo owner | Ritmo u owner distintos |
-| Necesita versionado, validación con herramienta o publicación | No | Sí |
-| Complejidad/tamaño | Encaja en una sección | Merece navegarlo solo |
-| Trazabilidad/auditoría/acceso | No requiere | Requiere |
+| Readers/consumers | Same, few | Distinct or independently reviewed |
+| Changes and ownership | Change together, same owner | Different cadence or owner |
+| Needs versioning, tool-based validation, or publishing | No | Yes |
+| Complexity/size | Fits in a section | Deserves standalone navigation |
+| Traceability/audit/access control | Not required | Required |
 
-### Handoff con skills de dominio
+Rules: **combine first; separate only when a factor in the "Separate" column is present.** Never create empty files or standalone files just to follow a template.
 
-| Pregunta | La lleva |
+### Handoff to domain skills
+
+| Question | Owner |
 |---|---|
-| Proceso transversal: niveles, organización de artefactos, descubrimiento | Esta skill |
-| Oficio de dominio: reglas concretas de diseño de API (naming de recursos, errores, paginación) | Skill `api-design`, si está disponible |
-| Oficio de base de datos: normalización, índices, migraciones, motor | Skill `database-design`, si está disponible |
-| Oficio de frontend: componentes, estado, UX, accesibilidad, testing de UI | Skill `frontend-engineering`, si está disponible |
+| Cross-cutting process: levels, artifact organization, discovery | This skill |
+| API craft: concrete API design rules (resource naming, errors, pagination) | The `api-design` skill, if available |
+| Database craft: normalization, indexes, migrations, engine | The `database-design` skill, if available |
+| Frontend craft: components, state, UX, accessibility, UI testing | The `frontend-engineering` skill, if available |
 
-Reglas: **combina primero; separa solo cuando un factor de la columna "Separa" esté presente.** Nunca crees archivos vacíos ni separados solo por plantilla.
+## Specialized rules (only when the topic applies)
 
-## Reglas especializadas (solo si el tema aplica)
-
-Para datos (DBDD, ERD, migraciones, motor), usuarios/roles/permisos (requisitos funcionales de acceso vs estrategia técnica RBAC/JWT) y diseño técnico detallado (diagramas, TDD, OpenAPI, ADR, RNF medibles): carga [`references/specialized-rules.md`](references/specialized-rules.md) y aplica solo lo que aplique. Resumen de los topes: no inventes roles/permisos ni reglas de acceso; los requisitos funcionales de acceso van en el PRD, la estrategia técnica en el SDD; una restricción documentada no está implementada ni verificada.
+For data (DBDD, ERD, migrations, engine), users/roles/permissions (functional access requirements vs RBAC/JWT technical strategy), and detailed technical design (diagrams, TDD, OpenAPI, ADR, measurable NFRs): load [`references/specialized-rules.md`](references/specialized-rules.md) and apply only what applies. Floor rules summary: never invent roles/permissions or access rules; functional access requirements belong in the PRD, technical strategy in the SDD; a documented restriction is neither implemented nor verified.
 
 ## Execution Steps
 
-1. **Determina el punto de partida.**
-   - Proyecto nuevo → workflow greenfield: carga [`references/greenfield-workflow.md`](references/greenfield-workflow.md). Empieza por problema, usuarios, resultado esperado y restricciones; no generes arquitectura, tablas ni endpoints antes de entender la necesidad.
-   - Proyecto existente → inspecciona el repositorio; trata código, configuración, pruebas y migraciones como evidencia del estado actual. Distingue estado actual vs diseño propuesto vs trabajo futuro.
-   - Nueva funcionalidad → revisa contexto, convenciones y diseños existentes.
-   - Ausencia de información no bloqueante → registra supuestos y preguntas abiertas. Pregunta al usuario solo cuando la ambigüedad bloquee materialmente una decisión.
-2. **Clasifica necesidad y nivel.** Carga [`references/document-types.md`](references/document-types.md) para identificar responsabilidades (tipo ≠ archivo). Aplica la Decision Gate de la sección "Nivel de documentación" (criterios arriba).
-3. **Reúne el contexto disponible.** Inspecciona archivos relevantes, marca lo importante como "Pendiente de definir" (no bloques el trabajo por detalles menores). Para decisiones de arquitectura, seguridad, persistencia, interoperabilidad o coste de cambio: explica alternativas y trade-offs apropiados al nivel.
-4. **Elige la organización documental.** Estructura mínima que sirva a los usuarios del proyecto; los layouts de ejemplo por nivel están en [`references/templates.md`](references/templates.md). Si ya existe una convención en el repositorio, respétala salvo que haya una razón clara para cambiarla.
-5. **Redacta o actualiza.** Usa [`references/templates.md`](references/templates.md) como guía, no formulario. Omite secciones irrelevantes. Al combinar, encabezados claros que preserven propósitos distintos sin duplicar contenido.
-6. **Verifica coherencia.** Requisitos/reglas/criterios sin contradicciones; dominio-datos-interfaces-flujos coherentes; endpoints/DTOs/errores/códigos HTTP coinciden con sus fuentes canónicas; enlaces, diagramas y referencias válidos (no inventes destinos); separación hechos/decisiones/propuestas/supuestos/preguntas.
-7. **Prepara entrega incremental.** Cuando aplique, hitos o vertical slices pequeños con criterios de aceptación y pruebas verificables. No inventes fechas ni estimaciones precisas. Señala bloqueos y decisiones de alto impacto pendientes.
-8. **Entrega según Output Contract** (abajo).
+1. **Determine the starting point.**
+   - New project → greenfield workflow: load [`references/greenfield-workflow.md`](references/greenfield-workflow.md). Start from problem, users, expected outcome, and constraints; never generate architecture, tables, or endpoints before understanding the need.
+   - Existing project → inspect the repository; treat code, configuration, tests, and migrations as evidence of the current state. Distinguish current state vs proposed design vs future work.
+   - New feature → review context, conventions, and existing designs.
+   - Missing non-blocking information → record assumptions and open questions. Ask the user only when ambiguity materially blocks a decision.
+2. **Classify need and level.** Load [`references/document-types.md`](references/document-types.md) to identify responsibilities (type ≠ file). Apply the "Documentation level" Decision Gate (criteria above).
+3. **Gather available context.** Inspect relevant files; mark important unknowns as "Pending definition" (do not block work on minor details). For decisions affecting architecture, security, persistence, interoperability, or change cost: explain alternatives and trade-offs proportionate to the level.
+4. **Choose the documentation organization.** The minimum structure that serves the project's users; example layouts per level are in [`references/templates.md`](references/templates.md). If a repository convention already exists, respect it unless there is a clear reason to change it.
+5. **Write or update.** Use [`references/templates.md`](references/templates.md) as guidance, never as a mandatory form. Omit irrelevant sections. When combining, keep clear headers that preserve distinct purposes without duplicating content.
+6. **Verify coherence.** Requirements/rules/criteria without contradictions; domain-data-interfaces-flows coherent; endpoints/DTOs/errors/HTTP codes match their canonical sources; links, diagrams, and references valid (never invent destinations); facts/decisions/proposals/assumptions/questions separated.
+7. **Prepare incremental delivery.** Where applicable, break the design into small milestones or vertical slices with acceptance criteria and verifiable tests. Never invent dates or precise estimates. Flag blockers and pending high-impact decisions.
+8. **Deliver per the Output Contract** (below).
 
 ## Output Contract
 
-Al finalizar, reporta:
+At the end, report:
 
-1. Archivos creados o modificados.
-2. Por qué se eligió ese nivel de documentación (y qué responsabilidad quedó dónde si se combinaron artefactos).
-3. Los supuestos más importantes.
-4. Las decisiones pendientes y bloqueos.
-5. El siguiente incremento recomendado.
+1. Files created or modified.
+2. Why that documentation level was chosen (and where each responsibility landed if artifacts were combined).
+3. The most important assumptions.
+4. Pending decisions and blockers.
+5. The recommended next increment.
 
-## Criterio de calidad
+## Quality Criterion
 
-La documentación está lista cuando ayuda a entender qué debe construirse o cómo funciona lo existente, identificar decisiones y restricciones, localizar contratos y verificar requisitos. El número de archivos y la longitud no son indicadores de calidad. **Prefiere la estructura más sencilla que mantenga el diseño comprensible, verificable y fácil de actualizar.**
+Documentation is ready when it helps understand what must be built or how the existing system works, identify the important decisions and constraints, locate contracts, and verify requirements. File count and length are not quality indicators. **Prefer the simplest structure that keeps the design comprehensible, verifiable, and easy to update.**
 
-Para el razonamiento de fondo (por qué esta skill existe, anti-burocracia, por qué cada regla) carga [`references/philosophy.md`](references/philosophy.md) cuando necesites justificar o adaptar decisiones donde la regla no cubre el caso concreto.
+For the underlying reasoning (why this skill exists, anti-bureaucracy, why each rule), load [`references/philosophy.md`](references/philosophy.md) when you need to justify or adapt decisions where a rule does not cover the concrete case.
 
 ## References
 
-- [`references/greenfield-workflow.md`](references/greenfield-workflow.md) — flujo iterativo para proyectos nuevos (descubrimiento → requisitos → dominio → diseño → entrega).
-- [`references/document-types.md`](references/document-types.md) — responsabilidades de cada tipo de artefacto (PRD, SDD, TDD, DBDD, OpenAPI, ADR) y cuándo separar.
-- [`references/templates.md`](references/templates.md) — plantillas orientativas por nivel (integrada ligera, PRD, SDD, DBDD…) y criterios de separación.
-- [`references/specialized-rules.md`](references/specialized-rules.md) — reglas específicas de datos, usuarios/roles/permisos y diseño técnico.
-- [`references/philosophy.md`](references/philosophy.md) — razonamiento de fondo, motivación y mapeo de la v1.2.1 (por qué de cada regla).
+- [`references/greenfield-workflow.md`](references/greenfield-workflow.md) — iterative flow for new projects (discovery → requirements → domain → design → delivery).
+- [`references/document-types.md`](references/document-types.md) — responsibilities of each artifact type (PRD, SDD, TDD, DBDD, OpenAPI, ADR) and when to separate.
+- [`references/templates.md`](references/templates.md) — orientative templates per level (integrated lightweight, PRD, SDD, DBDD…) and separation criteria.
+- [`references/specialized-rules.md`](references/specialized-rules.md) — specific rules for data, users/roles/permissions, and technical design.
+- [`references/philosophy.md`](references/philosophy.md) — underlying reasoning, motivation, and v1.2.1 mapping (why behind each rule).

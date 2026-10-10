@@ -1,99 +1,99 @@
-# Flujo de ingeniería para un proyecto nuevo (greenfield)
+# Engineering flow for a new project (greenfield)
 
-Este flujo convierte una idea en requisitos, un diseño validable y un plan de entrega. No es una cascada rígida: se adapta al riesgo y a la incertidumbre y puede volver a pasos anteriores cuando se aprende algo nuevo. **La documentación es proporcional al proyecto; no es obligatorio crear un archivo por cada tipo de artefacto.**
+This flow turns an idea into requirements, a verifiable design, and a delivery plan. It is not a rigid waterfall: it adapts to risk and uncertainty and may return to earlier steps when something new is learned. **Documentation is proportional to the project; creating a file per artifact type is not mandatory.**
 
-## 0. Selecciona un nivel inicial de documentación
+## 0. Select an initial documentation level
 
-Usa los factores de la skill: complejidad del dominio, impacto de fallos, seguridad y sensibilidad de los datos, integraciones, cantidad de colaboradores, incertidumbre y coste de cambios.
+Use the factors from the skill: domain complexity, failure impact, security and data sensitivity, integrations, number of collaborators, uncertainty, and cost of change.
 
-- **Ligero:** un proyecto acotado y de bajo riesgo. Normalmente un `project-design.md` y un `README.md` son suficientes.
-- **Estándar:** varios módulos, flujos relevantes, integraciones o colaboración. Separa PRD y diseño de sistema; separa datos/API solo si ayuda a los consumidores o a la evolución.
-- **Riguroso:** sistema grande, crítico o con requisitos fuertes de cumplimiento, seguridad, disponibilidad o trazabilidad. Separa artefactos para revisión y ownership independientes.
+- **Lightweight:** a bounded, low-risk project. Usually a `project-design.md` and a `README.md` are enough.
+- **Standard:** several modules, relevant flows, integrations, or collaboration. Separate PRD and system design; separate data/API only if it helps consumers or evolution.
+- **Rigorous:** a large, critical system or one with strong compliance, security, availability, or traceability requirements. Separate artifacts for independent review and ownership.
 
-El nivel puede variar por área: un proyecto pequeño con datos sensibles puede necesitar seguridad rigurosa y el resto de la documentación ligera. Empieza con el menor nivel que controle los riesgos conocidos y amplíalo cuando exista una razón concreta.
+The level can vary by area: a small project with sensitive data may need rigorous security and lightweight documentation for the rest. Start with the lowest level that controls known risks and expand when a concrete reason appears.
 
-## 1. Descubrimiento del problema
+## 1. Problem discovery
 
-Define, con el nivel de detalle disponible:
+Define, with the available level of detail:
 
-- Problema u oportunidad que se quiere resolver.
-- Usuarios o actores implicados y sus necesidades. Determina si hay tipos de usuario con capacidades diferentes, acceso anónimo/autenticado o reglas de propiedad de recursos.
-- Resultado esperado y señales de éxito; no inventes métricas numéricas.
-- Contexto, restricciones conocidas, dependencias y límites.
-- Qué queda explícitamente fuera del alcance inicial.
+- The problem or opportunity to solve.
+- Users or actors involved and their needs. Determine whether there are user types with different capabilities, anonymous/authenticated access, or resource-ownership rules.
+- Expected outcome and success signals; never invent numeric metrics.
+- Context, known constraints, dependencies, and boundaries.
+- What is explicitly out of the initial scope.
 
-**Salida:** una sección de contexto y objetivos en `project-design.md` o un brief/PRD independiente si el alcance o los colaboradores lo requieren. Si la idea sigue vaga, presenta una hipótesis inicial y las preguntas prioritarias.
+**Output:** a context-and-objectives section in `project-design.md`, or an independent brief/PRD if the scope or collaborators require it. If the idea is still vague, present an initial hypothesis and the priority questions.
 
-## 2. Requisitos y alcance del MVP
+## 2. Requirements and MVP scope
 
-Captura, según corresponda:
+Capture, as applicable:
 
-- Usuarios, casos de uso y flujos principales.
-- Roles, permisos funcionales y restricciones de acceso, si hay diferencias relevantes: quién puede ver, crear, modificar, eliminar o administrar qué recursos. Incluye una matriz solo cuando ayude a validar requisitos.
-- Requisitos funcionales y reglas de negocio.
-- Criterios de aceptación observables.
-- Requisitos de calidad y restricciones relevantes (seguridad, privacidad, rendimiento, disponibilidad, accesibilidad, mantenibilidad o cumplimiento).
-- Alcance del MVP, exclusiones, dependencias, riesgos y preguntas abiertas.
+- Users, use cases, and main flows.
+- Roles, functional permissions, and access restrictions, if there are relevant differences: who can view, create, modify, delete, or administer which resources. Include a matrix only when it helps validate requirements.
+- Functional requirements and business rules.
+- Observable acceptance criteria.
+- Quality requirements and relevant constraints (security, privacy, performance, availability, accessibility, maintainability, or compliance).
+- MVP scope, exclusions, dependencies, risks, and open questions.
 
-No uses requisitos vagos como “rápido”, “seguro” o “escalable” sin explicar cómo se evaluarán. No conviertas una solución técnica preferida en una necesidad de producto. En un proyecto pequeño, estos elementos pueden ser secciones breves del documento integrado.
+Never use vague requirements like "fast", "secure", or "scalable" without explaining how they will be evaluated. Never turn a preferred technical solution into a product need. On a small project, these elements can be brief sections of the integrated document.
 
-## 3. Modela el dominio y los procesos
+## 3. Model the domain and processes
 
-Identifica conceptos, términos ambiguos, actores, estados, transiciones e invariantes de negocio. Usa glosario o diagramas de flujo solo cuando ayuden a aclarar la lógica.
+Identify concepts, ambiguous terms, actors, states, transitions, and business invariants. Use a glossary or flow diagrams only when they help clarify logic.
 
-No conviertas automáticamente cada sustantivo en una tabla o clase, ni supongas que el modelo de dominio coincide exactamente con el esquema de persistencia.
+Never automatically turn every noun into a table or class, and never assume the domain model matches the persistence schema exactly.
 
-## 4. Diseña la arquitectura suficiente
+## 4. Design sufficient architecture
 
-Define las responsabilidades y límites necesarios para implementar el MVP. Considera, cuando aplique:
+Define the responsibilities and boundaries needed to implement the MVP. Consider, when applicable:
 
-- Componentes o módulos, dependencias y estilo arquitectónico.
-- Integraciones y límites de confianza.
-- Cómo se implementarán técnicamente los requisitos funcionales de roles/permisos (por ejemplo, en la capa de API, servicios o políticas de acceso), identidad y protección de datos sensibles. No confundas las capacidades exigidas por el negocio con la tecnología elegida para hacerlas cumplir.
-- Despliegue, configuración, manejo de errores y observabilidad.
-- Mantenibilidad, complejidad operacional y riesgos de evolución.
+- Components or modules, dependencies, and architectural style.
+- Integrations and trust boundaries.
+- How role/permission functional requirements will be technically enforced (for example, in the API layer, services, or access policies), identity, and protection of sensitive data. Never confuse capabilities demanded by the business with the technology chosen to enforce them.
+- Deployment, configuration, error handling, and observability.
+- Maintainability, operational complexity, and evolution risks.
 
-Explica trade-offs relevantes. Evita adoptar microservicios, nube, frameworks o patrones sin contexto. Registra con un ADR las decisiones de alto impacto que merecen conservar su razonamiento, no todas las elecciones triviales.
+Explain relevant trade-offs. Avoid adopting microservices, cloud, frameworks, or patterns without context. Record high-impact decisions that deserve preserving their reasoning in an ADR — not every trivial choice.
 
-## 5. Diseña los datos y contratos necesarios
+## 5. Design the necessary data and contracts
 
-Describe lo necesario para implementar y validar:
+Describe what is needed to implement and validate:
 
-- **Datos:** entidades, relaciones, atributos clave, restricciones e índices relevantes. Añade ERD, diccionario detallado o un DBDD independiente si la complejidad o el trabajo de varias personas lo justifica.
-- **API:** operaciones, parámetros, esquemas, autenticación y errores. Usa OpenAPI cuando el contrato tenga que compartirse, validarse o mantenerse como especificación.
-- **Integraciones:** contratos, dependencias, fallos esperados y reintentos cuando correspondan.
+- **Data:** entities, relationships, key attributes, constraints, and relevant indexes. Add an ERD, a detailed dictionary, or an independent DBDD if complexity or multi-person work justifies it.
+- **API:** operations, parameters, schemas, authentication, and errors. Use OpenAPI when the contract must be shared, validated, or maintained as a specification.
+- **Integrations:** contracts, dependencies, expected failures, and retries where they correspond.
 
-En un proyecto pequeño, un modelo conciso de datos y los principales endpoints pueden vivir en `project-design.md`. No fuerces contratos o archivos especializados que todavía no sean útiles.
+On a small project, a concise data model and the main endpoints can live in `project-design.md`. Never force contracts or specialized files that are not yet useful.
 
-## 6. Define calidad, seguridad y validación
+## 6. Define quality, security, and validation
 
-Vincula los criterios de aceptación con su método de verificación. Selecciona pruebas unitarias, de integración, contrato, extremo a extremo, rendimiento, seguridad o accesibilidad según los riesgos. Incorpora logging, métricas, trazas, backups y recuperación cuando sean necesidades reales.
+Tie acceptance criteria to their verification method. Select unit, integration, contract, end-to-end, performance, security, or accessibility tests according to the risks. Add logging, metrics, traces, backups, and recovery when they are real needs.
 
-No añadas listas genéricas de controles sin considerar el contexto; tampoco omitas controles importantes solo porque el proyecto sea pequeño.
+Never add generic control checklists without considering context; also never omit important controls just because the project is small.
 
-## 7. Planifica un primer incremento
+## 7. Plan the first increment
 
-Propón el primer *vertical slice* o hito que permita validar una parte útil del sistema. Para cada elemento de trabajo, detalla según corresponda el resultado, alcance, dependencias, criterios de aceptación, pruebas y decisiones pendientes.
+Propose the first vertical slice or milestone that validates a useful part of the system. For each work item, detail as applicable the outcome, scope, dependencies, acceptance criteria, tests, and pending decisions.
 
-No inventes fechas ni estimaciones precisas. Evita dividir el trabajo en tareas artificialmente pequeñas.
+Never invent dates or precise estimates. Avoid splitting work into artificially small tasks.
 
-## 8. Revisión antes de implementar
+## 8. Review before implementing
 
-Resume:
+Summarize:
 
-- Qué requisitos y límites están acordados.
-- Qué nivel de documentación elegiste y por qué.
-- Qué arquitectura y modelo de datos propones.
-- Qué contratos y controles de calidad son necesarios.
-- Qué supuestos y decisiones de alto impacto continúan abiertos.
-- Qué archivos creaste y dónde se encuentra la fuente canónica de cada asunto.
-- Cuál es el primer incremento y cómo se verificará.
+- Which requirements and constraints are agreed.
+- Which documentation level you chose and why.
+- Which architecture and data model you propose.
+- Which contracts and quality controls are necessary.
+- Which assumptions and high-impact decisions remain open.
+- Which files you created and where the canonical source of each subject lives.
+- What the first increment is and how it will be verified.
 
-No afirmes que el proyecto está “completamente diseñado” si quedan decisiones importantes sin resolver. La revisión habilita un inicio informado, no congela el diseño para siempre. Ajusta las secciones o documentos afectados conforme cambie el entendimiento.
+Never claim the project is "fully designed" while important decisions remain unresolved. The review enables an informed start; it does not freeze the design forever. Adjust the affected sections or documents as understanding changes.
 
-## Entregables orientativos por nivel
+## Orientative deliverables per level
 
-### Ligero
+### Lightweight
 
 ```text
 docs/
@@ -101,23 +101,23 @@ docs/
 README.md
 ```
 
-`project-design.md` reúne, según corresponda: problema y alcance, MVP/requisitos, reglas de negocio, decisiones de arquitectura, modelo de datos, API/integraciones, estrategia de pruebas, riesgos y preguntas abiertas. `README.md` cubre preparación y ejecución del proyecto.
+`project-design.md` gathers, as applicable: problem and scope, MVP/requirements, business rules, architecture decisions, data model, API/integrations, test strategy, risks, and open questions. `README.md` covers project setup and execution.
 
-### Estándar
+### Standard
 
 ```text
 docs/
 ├── prd.md
 ├── system-design.md
-├── database-design.md   # si necesita detalle independiente
-├── api/openapi.yaml     # si el contrato lo justifica
-└── adr/                 # decisiones relevantes
+├── database-design.md   # if it needs independent detail
+├── api/openapi.yaml     # if the contract justifies it
+└── adr/                 # relevant decisions
 ```
 
-Usa solo los archivos necesarios. Un TDD se añade para una funcionalidad o cambio con decisiones técnicas sustanciales.
+Use only the necessary files. Add a TDD for a feature or change with substantial technical decisions.
 
-### Riguroso
+### Rigorous
 
-Separa PRD, SDD, DBDD, contratos, TDD, ADR, pruebas, despliegue y operación según las necesidades de trazabilidad, auditoría, colaboración y evolución independiente. Mantén una sola fuente de verdad y enlaces entre documentos.
+Separate PRD, SDD, DBDD, contracts, TDD, ADR, testing, deployment, and operations according to traceability, audit, collaboration, and independent evolution needs. Keep one source of truth and link between documents.
 
-El objetivo en todos los niveles es el mismo: reducir ambigüedad, controlar riesgos y facilitar la implementación. Lo que cambia es la profundidad y la organización, no la necesidad de razonar sobre requisitos y diseño.
+The goal at every level is the same: reduce ambiguity, control risks, and make implementation easier. What changes is the depth and the organization — not the need to reason about requirements and design.
