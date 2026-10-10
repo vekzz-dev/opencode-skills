@@ -3,7 +3,7 @@ name: solution-design
 description: "Trigger: solution design, diseño de la solución, software design docs, PRD, SDD, DBDD, TDD, ADR, arquitectura, modelo de datos, requisitos, MVP, greenfield. Guide software engineering from idea to implementation or evolve an existing system, adapting documentation to risk."
 metadata:
   author: "vekzz-dev"
-  version: "2.1.0"
+  version: "2.1.1"
   language: "es"
   license: "MIT"
 ---
@@ -60,7 +60,16 @@ Factores (evalúa cualitativamente, el tamaño por sí solo no decide): compleji
 | Complejidad/tamaño | Encaja en una sección | Merece navegarlo solo |
 | Trazabilidad/auditoría/acceso | No requiere | Requiere |
 
-Regla: **combina primero; separa solo cuando un factor de la columna "Separa" esté presente.** Nunca crees archivos vacíos ni separados solo por plantilla.
+### Handoff con skills de dominio
+
+| Pregunta | La lleva |
+|---|---|
+| Proceso transversal: niveles, organización de artefactos, descubrimiento | Esta skill |
+| Oficio de dominio: reglas concretas de diseño de API (naming de recursos, errores, paginación) | Skill `api-design`, si está disponible |
+| Oficio de base de datos: normalización, índices, migraciones, motor | Skill `database-design`, si está disponible |
+| Oficio de frontend: componentes, estado, UX, accesibilidad, testing de UI | Skill `frontend-engineering`, si está disponible |
+
+Reglas: **combina primero; separa solo cuando un factor de la columna "Separa" esté presente.** Nunca crees archivos vacíos ni separados solo por plantilla.
 
 ## Reglas especializadas (solo si el tema aplica)
 
