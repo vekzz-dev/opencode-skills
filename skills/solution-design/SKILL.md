@@ -1,14 +1,14 @@
 ---
-name: software-design-docs
-description: "Trigger: software design docs, PRD, SDD, DBDD, TDD, ADR, diseño de software, arquitectura, modelo de datos, requisitos, MVP, greenfield. Guide software engineering from idea to implementation or evolve an existing system, adapting documentation to risk."
+name: solution-design
+description: "Trigger: solution design, diseño de la solución, software design docs, PRD, SDD, DBDD, TDD, ADR, arquitectura, modelo de datos, requisitos, MVP, greenfield. Guide software engineering from idea to implementation or evolve an existing system, adapting documentation to risk."
 metadata:
   author: "vekzz-dev"
-  version: "2.0.0"
+  version: "2.1.0"
   language: "es"
   license: "MIT"
 ---
 
-# Software Design Documentation
+# Solution Design
 
 Contrato de instrucciones para guiar la ingeniería y el diseño de software de proyectos nuevos o existentes. Ayuda a pasar del problema y los requisitos a un diseño validable y un plan de entrega, manteniendo la documentación proporcional al tamaño, complejidad, riesgo y forma de trabajo del proyecto. Los tipos de documento describen responsabilidades; **no implican que cada tipo deba convertirse en un archivo separado**.
 

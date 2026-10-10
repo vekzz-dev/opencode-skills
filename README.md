@@ -16,7 +16,7 @@ A collection of AI agent skills for [OpenCode](https://github.com/opencode-ai/op
 | [java-springboot](skills/java-springboot/) | Spring Boot production patterns: DI, REST, security, caching |
 | [java-springboot-testing](skills/java-springboot-testing/) | Test slices, MockMvcTester, Testcontainers, AssertJ |
 | [latex](skills/latex/) | Compile-safe LaTeX academic documents: articles, theses, essays, guides |
-| [software-design-docs](skills/software-design-docs/) | Design docs from idea to implementation: PRD, SDD, DBDD, TDD, ADR — scaled to project risk |
+| [solution-design](skills/solution-design/) | Design docs from idea to implementation: PRD, SDD, DBDD, TDD, ADR — scaled to project risk |
 | [ui-components](skills/ui-components/) | Preline UI, HyperUI, Flowbite — component libraries for Thymeleaf + HTMX |
 | [update-readme](skills/update-readme/) | Detect and update outdated README content |
 | [vault-tech-note](skills/vault-tech-note/) | Learning-first tech notes for an Obsidian vault: verified sources, mental models, worked examples |
