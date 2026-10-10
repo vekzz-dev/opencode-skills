@@ -1,21 +1,30 @@
 ---
 name: docker
 description: >
-  Docker and containerization best practices: multi-stage builds, docker-compose, networking, volumes, security, and image optimization.
-  Trigger: Docker, Dockerfile, docker-compose, container, image build, or containerization.
+  Containerization best practices, engine-agnostic: multi-stage builds, compose, networking, volumes, security, and image optimization for Docker or Podman.
+  Trigger: Docker, Dockerfile, docker-compose, Podman, container, image build, or containerization.
 license: MIT
 metadata:
   author: vekzz-dev
-  version: "1.0"
+  version: "1.1"
 ---
 
 ## When to Use
 
 - Writing or reviewing a Dockerfile
-- Setting up docker-compose for dev/test/prod
+- Setting up compose for dev/test/prod
 - Optimizing image size or build time
 - Container security, networking, or volume management
-- Dockerizing a Spring Boot application
+- Containerizing a Spring Boot application
+
+## Engine agnosticism
+
+Everything in this skill is **spec OCI**: the Dockerfile, the multi-stage build, the Compose spec files, and the feature flags shown run unchanged on Docker or Podman. The examples use `docker` CLI; substitute `podman` or lean on the `podman-docker` shim where it exists.
+
+- Dockerfile semantics: Docker (BuildKit) ≈ Podman (Buildah). No `docker`-only Dockerfile instructions are used here.
+- Compose: prefer the Compose spec files (`compose.yaml`) and a Compose v2 client. `docker compose` (v2.22+) works against a Podman socket via `DOCKER_HOST`; `podman-compose` implements less of the spec (notably no `watch`).
+- Image scanning: `trivy` is the engine-neutral default (next section).
+- Image versions in the examples below are illustrative (e.g. `postgres:16-alpine`); the production version is a project decision recorded in the project docs, not a rule of this skill.
 
 ## Instructions
 
@@ -121,12 +130,12 @@ volumes:
 
 | Need | Approach |
 |------|----------|
-| Local dev with hot reload | `docker compose watch` or `spring-boot-devtools` with volume mount |
+| Local dev with hot reload | `docker compose watch` (v2.22+, works against a Podman socket via `DOCKER_HOST`; absent in `podman-compose`) or `spring-boot-devtools` with volume mount |
 | CI build | Multi-stage with `--cache-from` |
 | Production deploy | Slim runtime image, non-root, read-only root fs |
-| Database in tests | `Testcontainers` (not docker-compose in tests) |
-| Multiple microservices | `docker compose` with shared network |
-| Kubernetes | Use the same image, add liveness/readiness probes |
+| Database in tests | `Testcontainers` (not compose in tests; see `java-springboot-testing` skill) |
+| Multiple microservices | Compose with shared network |
+| Kubernetes | Use the same OCI image, add liveness/readiness probes |
 
 ### 5. Security
 
@@ -134,29 +143,34 @@ volumes:
 - `USER nonroot` — always
 - `COPY --chown=nonroot:nonroot` — match the runtime user
 - Read-only root filesystem: `--read-only --tmpfs /tmp`
-- Use `docker scout` or `trivy` for vulnerability scanning
+- Scan with `trivy` (engine-neutral), e.g. `trivy image myapp:latest`; `docker scout` is Docker-only
 - No `curl`/`wget` in runtime image — reduces attack surface
 
 ## Commands
 
 ```bash
-# Build with cache from registry
+# Build (/docker | /podman — same OCI inputs through either engine)
 docker build --cache-from myapp:latest -t myapp:latest .
+podman build -t myapp:latest .
 
-# Run with compose for dev
+# Run with compose for dev (Compose spec client; engine-agnostic via socket)
 docker compose up -d
+DOCKER_HOST=unix:///run/user/1000/podman/podman.sock docker compose up -d
 
-# Watch for hot reload (Docker Compose v2.22+)
+# Watch for hot reload (Compose v2.22+)
 docker compose watch
 
-# Scan image for vulnerabilities
-docker scout quick myapp:latest
+# Scan image for vulnerabilities (engine-neutral)
+trivy image myapp:latest
+# Docker-only alternative: docker scout quick myapp:latest
 
-# Run with read-only root fs
-docker run --read-only --tmpfs /tmp myapp:latest
+# Run with read-only root fs (identical flag on docker and podman)
+podman run --read-only --tmpfs /tmp myapp:latest
 ```
 
 ## Resources
 
 - [Dockerfile reference](https://docs.docker.com/reference/dockerfile/)
+- [Open Container Initiative spec](https://opencontainers.org/)
+- [Podman documentation](https://docs.podman.io/)
 - [Spring Boot layered JARs](https://docs.spring.io/spring-boot/reference/packaging/container-images/layered.html)

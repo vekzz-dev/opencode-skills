@@ -6,7 +6,7 @@ description: >
 license: MIT
 metadata:
   author: vekzz-dev
-  version: "1.1"
+  version: "1.3"
 ---
 
 ## When to Use
@@ -53,7 +53,10 @@ Need full integration test?
 | Scenario | Annotation | Reference |
 |----------|------------|-----------|
 | Controller + HTTP semantics | `@WebMvcTest` | [references/webmvctest.md](references/webmvctest.md) |
+| Endpoint security, pagination contracts, engine matrix | Tier 1/Tier 2 patterns | [references/endpoint-testing.md](references/endpoint-testing.md) |
 | Repository + JPA queries | `@DataJpaTest` | [references/datajpatest.md](references/datajpatest.md) |
+| Repository tests on other engines / SQLite | engine variety | [references/database-testing.md](references/database-testing.md) |
+| Database state between tests, Flyway migration testing | persistence integrity | [references/database-testing.md](references/database-testing.md) |
 | REST client + external APIs | `@RestClientTest` | [references/restclienttest.md](references/restclienttest.md) |
 | JSON (de)serialization | `@JsonTest` | [references/test-slices-overview.md](references/test-slices-overview.md) |
 | Full application | `@SpringBootTest` | [references/test-slices-overview.md](references/test-slices-overview.md) |
@@ -85,10 +88,18 @@ Need full integration test?
 
 - [references/instancio.md](references/instancio.md) - Generate complex test objects (3+ properties)
 
+### Database State & Migrations
+
+- [references/database-testing.md](references/database-testing.md) - Data reset strategies, Flyway migration testing discipline, SQLite variant, multi-engine suites, Podman
+
 ### Performance & Migration
 
 - [references/context-caching.md](references/context-caching.md) - Speed up test suites
 - [references/sb4-migration.md](references/sb4-migration.md) - Spring Boot 4.0 changes
+
+### Endpoint Patterns
+
+- [references/endpoint-testing.md](references/endpoint-testing.md) - Security/auth (real chain + jwt()), pagination HTTP contracts, multi-engine prioritization
 
 ## Commands
 

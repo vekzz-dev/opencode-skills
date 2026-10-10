@@ -232,3 +232,4 @@ class OrderServiceTest {
 3. Use specific versions (postgres:18) not latest
 4. Keep container config in static field
 5. Use @DataJpaTest with AutoConfigureTestDatabase.Replace.NONE
+6. SQLite has no container variant (runs in-memory/file); for data-reset strategies, Flyway migration testing discipline, SQLite caveats, and Podman see [database-testing.md](database-testing.md)
