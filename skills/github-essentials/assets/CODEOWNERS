@@ -1,0 +1,6 @@
+# The last matching pattern wins, so specific rules go below the catch-all.
+# Syntax: @user, @org/team, or an email address.
+
+* __CODEOWNER__
+
+/.github/ __CODEOWNER__

@@ -13,6 +13,7 @@ A collection of AI agent skills for [OpenCode](https://github.com/opencode-ai/op
 | [docker](skills/docker/) | Multi-stage builds, docker-compose, security, image optimization |
 | [frontend-engineering](skills/frontend-engineering/) | Frontend engineering: architecture, components, state, UX, accessibility, testing, performance |
 | [git-commit](skills/git-commit/) | Conventional commits with intelligent staging and message generation |
+| [github-essentials](skills/github-essentials/) | Bootstrap a `.github/` directory: issue forms, PR template, CODEOWNERS, SECURITY.md, dependabot, tag-driven release workflow |
 | [java-junit](skills/java-junit/) | JUnit 5 best practices: parameterized tests, assertions, mocking |
 | [java-springboot](skills/java-springboot/) | Spring Boot production patterns: DI, REST, security, caching |
 | [java-springboot-testing](skills/java-springboot-testing/) | Test slices, MockMvcTester, Testcontainers, AssertJ |
@@ -30,6 +31,8 @@ Each skill follows this layout:
 ```
 skill-name/
 ├── SKILL.md           # Main instructions (frontmatter + workflow)
+├── assets/            # Optional templates and boilerplate
+│   └── template.yml
 └── references/        # Optional supplementary docs
     └── *.md
 ```

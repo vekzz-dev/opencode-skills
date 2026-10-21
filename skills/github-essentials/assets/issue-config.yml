@@ -1,0 +1,11 @@
+# Keep the issue tracker for actionable reports only.
+blank_issues_enabled: false
+
+contact_links:
+  - name: Questions and usage help
+    url: https://github.com/__OWNER__/__REPO__/discussions
+    about: Ask how to use this project here instead of opening an issue.
+
+  - name: Report a security vulnerability
+    url: https://github.com/__OWNER__/__REPO__/security/advisories/new
+    about: Report vulnerabilities privately. Never open a public issue.
