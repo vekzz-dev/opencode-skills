@@ -8,6 +8,7 @@ A collection of AI agent skills for [OpenCode](https://github.com/opencode-ai/op
 |-------|-------------|
 | [api-design](skills/api-design/) | REST API design: resource naming, versioning, error handling, pagination, HATEOAS, OpenAPI |
 | [changelog-maintenance](skills/changelog-maintenance/) | Semantic versioning, changelogs, and release notes |
+| [code-mentor](skills/code-mentor/) | Mentor-style code review: bugs and security first, design risk, honest verdict |
 | [create-readme](skills/create-readme/) | Generate comprehensive README files for any project type |
 | [database-design](skills/database-design/) | Database modeling, normalization, indexing, migrations, query optimization |
 | [docker](skills/docker/) | Multi-stage builds, docker-compose, security, image optimization |
